@@ -261,14 +261,36 @@
         /* Section Layout */
         .section {
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 280px 1fr;
             gap: 32px;
             margin-bottom: 48px;
         }
         
+        /* 大屏幕：summary更详细 */
+        @media (min-width: 1400px) {
+            .section {
+                grid-template-columns: 320px 1fr;
+            }
+            
+            .news-excerpt {
+                -webkit-line-clamp: 4;
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+            
+            .news-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* 移动端：热门话题在上方 */
         @media (max-width: 900px) {
             .section {
                 grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1 !important;
             }
         }
         
@@ -382,6 +404,23 @@
             overflow: hidden;
         }
         
+        /* 大屏幕显示更多内容 */
+        @media (min-width: 1400px) {
+            .news-excerpt {
+                -webkit-line-clamp: 4;
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+            
+            .news-title {
+                font-size: 1.2rem;
+            }
+            
+            .news-item {
+                padding: 24px;
+            }
+        }
+        
         .news-source {
             margin-top: 12px;
             display: flex;
@@ -404,11 +443,18 @@
             text-decoration: underline;
         }
         
-        /* Sidebar */
+        /* Sidebar - 桌面端在左侧 */
         .sidebar {
             display: flex;
             flex-direction: column;
             gap: 24px;
+        }
+        
+        /* 移动端热门话题在上方 */
+        @media (max-width: 900px) {
+            .sidebar {
+                order: -1;
+            }
         }
         
         .sidebar-card {
@@ -558,7 +604,7 @@
                     <button class="lang-btn active" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-                <div class="date-badge">2026.02.28</div>
+                <div class="date-badge">2026.03.02</div>
             </div>
         </div>
     </header>
@@ -1026,7 +1072,7 @@
                 tech_title_5: 'ASML高数值孔径EUV光刻机量产在即',
                 tech_excerpt_5: 'ASML预计2026年净销售额达407-467亿美元，批准143.7亿美元股票回购计划，对未来增长充满信心。',
                 footer_title: '信息汇总中心 · 每日精选财经科技资讯',
-                update_time: '更新时间：2026年2月28日'
+                update_time: '更新时间：2026年3月2日'
             },
             en: {
                 title: 'News Hub',
@@ -1094,7 +1140,7 @@
                 tech_title_5: 'ASML High-NA EUV Machines Ready for Mass Production',
                 tech_excerpt_5: 'ASML expects $40.7-46.7B net sales in 2026, approves $14.37B share buyback program.',
                 footer_title: 'News Hub · Daily Finance & Tech Digest',
-                update_time: 'Updated: Feb 28, 2026'
+                update_time: 'Updated: Mar 2, 2026'
             }
         };
         
