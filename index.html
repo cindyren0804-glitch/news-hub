@@ -635,8 +635,13 @@
             tab.addEventListener('click', () => showPage(tab.dataset.page));
         });
         
-        // 页面加载
-        loadNews();
+        // 页面加载 - 多种方式确保执行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadNews);
+        } else {
+            loadNews();
+        }
+        window.addEventListener('load', loadNews);
     </script>
 </body>
 </html>
