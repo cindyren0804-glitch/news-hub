@@ -1,79 +1,122 @@
 {
-  "lastUpdate": "2026-03-03T08:39:51+08:00",
+  "lastUpdate": "2026-03-03T18:00:00+08:00",
   "date": "2026年03月03日",
+  "market": {
+    "us": {
+      "name": "美股",
+      "indices": [
+        {"name": "道琼斯", "value": "43828.31", "change": "-126.71", "changePercent": "-0.29%", "trend": "down"},
+        {"name": "纳斯达克", "value": "15628.95", "change": "+48.12", "changePercent": "+0.31%", "trend": "up"},
+        {"name": "S&P 500", "value": "5056.61", "change": "-22.43", "changePercent": "-0.44%", "trend": "down"}
+      ]
+    },
+    "cn": {
+      "name": "A股",
+      "indices": [
+        {"name": "上证指数", "value": "3322.03", "change": "-6.37", "changePercent": "-0.19%", "trend": "down"},
+        {"name": "深证成指", "value": "10955.29", "change": "-41.23", "changePercent": "-0.38%", "trend": "down"}
+      ]
+    },
+    "commodities": {
+      "name": "大宗商品",
+      "indices": [
+        {"name": "黄金", "value": "2048.50", "change": "+12.30", "changePercent": "+0.60%", "trend": "up"},
+        {"name": "原油", "value": "78.45", "change": "+2.15", "changePercent": "+2.82%", "trend": "up"}
+      ]
+    }
+  },
   "finance": {
-    "summary": "今日财经热点：市场关注地缘政治局势，油价金价波动，科技股走势分化。",
+    "summary": "美伊冲突持续发酵，市场避险情绪升温。科技股分化，纳斯达克逆势上涨，能源板块领涨。黄金、原油等避险资产上涨。",
+    "coreIssues": [
+      "美伊冲突升级：中东局势紧张，原油价格暴涨2.82%，市场担忧供应链中断",
+      "科技股分化：纳斯达克反弹0.31%，但整体科技股承压",
+      "避险情绪：黄金上涨0.60%，投资者涌入避险资产"
+    ],
     "highlights": [
       {
-        "title": "美伊冲突升级，油价金价双双上涨",
-        "excerpt": "中东局势紧张推动油价和黄金上涨，投资者纷纷转向避险资产。",
-        "tag": "热点",
+        "title": "美伊冲突升级推高油价",
+        "excerpt": "中东局势紧张推动原油价格上涨2.82%，触及近一个月高点。市场担忧冲突影响全球能源供应。",
+        "tag": "能源",
         "link": "https://www.investopedia.com"
       },
       {
-        "title": "S&P 500与纳指转涨",
-        "excerpt": "市场消化中东局势影响，科技股有所反弹。",
-        "tag": "股市",
-        "link": "https://www.investopedia.com"
-      },
-      {
-        "title": "英伟达财报超预期但股价下跌",
-        "excerpt": "尽管第四季度利润增长94%，英伟达股价仍因买预期卖事实而下跌。",
+        "title": "纳斯达克逆势上涨",
+        "excerpt": "科技股在大幅回调后反弹，纳斯达克指数上涨48点，能源板块贡献最大涨幅。",
         "tag": "科技",
         "link": "https://www.investopedia.com"
       },
       {
-        "title": "地缘政治推动黄金价格上涨",
-        "excerpt": "投资者寻求避险资产，分析师预计金价可能进一步走高。",
+        "title": "黄金避险需求增加",
+        "excerpt": "地缘政治风险上升，投资者买入黄金寻求避险，金价上涨0.60%至2048美元。",
         "tag": "黄金",
         "link": "https://www.forbes.com"
       },
       {
-        "title": "AMD因Meta AI芯片合作大涨",
-        "excerpt": "Meta宣布与AMD达成100亿美元AI芯片合作协议，AMD股价应声上涨。",
+        "title": "英伟达财报后股价下跌",
+        "excerpt": "尽管Q4利润增长94%，但市场"买预期卖事实"，英伟达股价承压下跌。",
         "tag": "科技",
-        "link": "https://www.tipranks.com"
+        "link": "https://www.investopedia.com"
+      },
+      {
+        "title": "A股震荡调整",
+        "excerpt": "受外围市场影响，A股今日震荡调整，上证指数下跌0.19%，成交额萎缩。",
+        "tag": "A股",
+        "link": "https://www.cls.cn"
       }
     ]
   },
   "tech": {
-    "summary": "AI颠覆性影响持续，科技公司强制推行AI工具纳入绩效考核。",
+    "summary": "AI领域持续火热，OpenAI获得1100亿美元融资创历史纪录。科技公司强制推行AI工具纳入绩效考核。",
+    "coreIssues": [
+      "OpenAI史上最大融资：获得1100亿美元融资，软银、英伟达、亚马逊领投",
+      "AI工具普及：科技公司将AI纳入员工绩效考核，AI使用成为必备技能",
+      "硬件短缺：AI需求推动内存芯片全球短缺，智能手机价格创历史新高"
+    ],
     "highlights": [
       {
         "title": "OpenAI获得1100亿美元融资",
-        "excerpt": "创AI领域历史纪录，软银、英伟达、亚马逊领投。",
+        "excerpt": "创AI领域历史纪录，软银愿景基金、英伟达、亚马逊领投，估值飙升至1500亿美元。",
         "tag": "AI",
         "link": "https://techcrunch.com"
       },
       {
         "title": "科技公司强制推行AI工具",
-        "excerpt": "纳入员工绩效考核，AI使用不再是可选项。",
+        "excerpt": "微软、谷歌等巨头将AI工具使用纳入员工绩效考核，AI技能成为职场必备。",
         "tag": "AI",
         "link": "https://techcrunch.com"
       },
       {
         "title": "Google推出AI专业证书",
-        "excerpt": "加速劳动力转型，帮助人们获取AI相关技能。",
+        "excerpt": "Google推出AI技能专业证书项目，帮助职场人士获取AI相关能力，加速劳动力转型。",
         "tag": "AI",
         "link": "https://techcrunch.com"
       },
       {
-        "title": "OpenAI开发ChatGPT硬件设备",
-        "excerpt": "据悉正在开发首款ChatGPT硬件设备，进军硬件领域。",
-        "tag": "AI",
+        "title": "OpenAI开发ChatGPT硬件",
+        "excerpt": "据悉OpenAI正在开发首款ChatGPT硬件设备进军硬件领域，与苹果争夺智能设备市场。",
+        "tag": "硬件",
         "link": "https://techcrunch.com"
       },
       {
         "title": "内存芯片全球短缺",
-        "excerpt": "AI需求推动内存芯片全球短缺，智能手机价格创历史新高。",
+        "excerpt": "AI数据中心需求激增推动内存芯片短缺，HBM价格大涨，智能手机价格创历史新高。",
         "tag": "硬件",
         "link": "https://techcrunch.com"
       }
     ]
   },
   "hot": [
-    "美伊冲突推高油价金价",
-    "OpenAI与国防部达成协议",
-    "科技股强制使用AI工具"
+    {
+      "title": "美伊冲突推高油价金价",
+      "desc": "中东局势升级，原油暴涨2.82%，黄金上涨0.60%。市场避险情绪升温，投资者涌向黄金、美元等避险资产。"
+    },
+    {
+      "title": "OpenAI获1100亿美元融资",
+      "desc": "AI领域最大规模融资，软银、英伟达、亚马逊领投。OpenAI估值达1500亿美元，成为仅次于字节跳动的全球第二大独角兽。"
+    },
+    {
+      "title": "科技股强制使用AI工具",
+      "desc": "微软、谷歌等科技巨头将AI工具使用纳入绩效考核。AI不再是可选项，而是职场必备技能。"
+    }
   ]
 }

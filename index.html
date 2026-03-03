@@ -6,12 +6,7 @@
     <title>熊猫信息网站 | Panda Info Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
@@ -23,419 +18,112 @@
             --border: #e2e8f0;
             --shadow: 0 1px 3px rgba(0,0,0,0.1);
             --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+            --up: #16a34a;
+            --down: #dc2626;
         }
-        
-        body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
+        body { font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-light); color: var(--text-primary); line-height: 1.6; }
         
         /* Header */
-        .header {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            font-size: 1.5rem;
-        }
-        
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .date-badge {
-            background: var(--primary);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
+        .header { background: var(--bg-white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .logo { display: flex; align-items: center; gap: 8px; font-size: 1.25rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .logo-icon { font-size: 1.5rem; }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+        .date-badge { background: var(--primary); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; }
         
         /* Top Tabs */
-        .top-tabs {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .top-tabs-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            gap: 0;
-        }
-        
-        .top-tab {
-            padding: 16px 32px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            font-weight: 500;
-            font-family: inherit;
-        }
-        
-        .top-tab:hover {
-            color: var(--primary);
-        }
-        
-        .top-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
+        .top-tabs { background: var(--bg-white); border-bottom: 1px solid var(--border); }
+        .top-tabs-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: flex; gap: 0; }
+        .top-tab { padding: 16px 32px; border: none; background: transparent; color: var(--text-secondary); font-size: 1rem; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; font-family: inherit; }
+        .top-tab:hover { color: var(--primary); }
+        .top-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
         
         /* Main Container */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 24px 20px;
-        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
+        .page-content { display: none; }
+        .page-content.active { display: block; }
         
-        /* Page Content */
-        .page-content {
-            display: none;
-        }
+        /* Market Indices */
+        .market-section { margin-bottom: 24px; }
+        .market-group { background: var(--bg-white); border-radius: 12px; padding: 20px; border: 1px solid var(--border); margin-bottom: 16px; }
+        .market-group h3 { font-size: 1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .indices-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+        .index-item { background: var(--bg-light); padding: 12px 16px; border-radius: 8px; text-align: center; }
+        .index-name { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .index-value { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .index-change { font-size: 0.85rem; font-weight: 500; }
+        .index-change.up { color: var(--up); }
+        .index-change.down { color: var(--down); }
         
-        .page-content.active {
-            display: block;
-        }
+        /* Daily Summary */
+        .daily-summary { background: var(--bg-white); border-radius: 16px; padding: 24px; margin-bottom: 32px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+        .summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .summary-header h2 { font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .summary-text { color: var(--text-primary); font-size: 1rem; line-height: 1.8; margin-bottom: 16px; padding: 16px; background: var(--bg-light); border-radius: 8px; }
         
-        /* Daily Summary Banner */
-        .daily-summary {
-            background: var(--bg-white);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
+        /* Core Issues */
+        .core-issues { margin-bottom: 20px; }
+        .core-issues h3 { font-size: 0.95rem; margin-bottom: 12px; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+        .core-issue { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 8px; margin-bottom: 8px; border-left: 3px solid var(--primary); }
+        .core-issue-num { background: var(--primary); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        .core-issue-text { font-size: 0.9rem; line-height: 1.5; }
         
-        .summary-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-        
-        .summary-header h2 {
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .summary-text {
-            color: var(--text-primary);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 16px;
-            padding: 16px;
-            background: var(--bg-light);
-            border-radius: 8px;
-        }
-        
-        .toggle-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            font-size: 0.9rem;
-            cursor: pointer;
-            padding: 8px 16px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            border: none;
-            font-family: inherit;
-        }
-        
-        .toggle-icon {
-            transition: transform 0.3s;
-        }
-        
-        .toggle-btn.expanded .toggle-icon {
-            transform: rotate(180deg);
-        }
-        
-        .summary-details {
-            display: none;
-        }
-        
-        .summary-details.show {
-            display: block;
-        }
-        
-        .summary-section {
-            margin-bottom: 24px;
-        }
-        
-        .summary-section-title {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .summary-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 12px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            gap: 12px;
-        }
-        
-        .summary-item span {
-            flex: 1;
-        }
-        
-        .summary-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        
-        .summary-link:hover {
-            text-decoration: underline;
-        }
+        .toggle-btn { display: flex; align-items: center; gap: 8px; color: var(--primary); font-size: 0.9rem; cursor: pointer; padding: 8px 16px; background: var(--bg-light); border-radius: 8px; border: none; font-family: inherit; }
+        .toggle-icon { transition: transform 0.3s; }
+        .toggle-btn.expanded .toggle-icon { transform: rotate(180deg); }
+        .summary-details { display: none; }
+        .summary-details.show { display: block; }
         
         /* Hot Topics */
-        .hot-topics {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-        }
-        
-        .hot-topics h2 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .hot-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        
-        .hot-item {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .hot-rank {
-            background: rgba(255,255,255,0.3);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
+        .hot-topics { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .hot-topics h2 { color: white; font-size: 1.1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .hot-list { display: flex; flex-direction: column; gap: 12px; }
+        .hot-item { background: rgba(255,255,255,0.2); color: white; padding: 16px; border-radius: 12px; }
+        .hot-item-title { font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .hot-rank { background: rgba(255,255,255,0.3); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+        .hot-item-desc { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; }
         
         /* News Section */
-        .news-section {
-            margin-bottom: 32px;
-        }
+        .news-section { margin-bottom: 32px; }
+        .news-section h2 { font-size: 1.1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item { background: var(--bg-white); border-radius: 12px; padding: 20px; border: 1px solid var(--border); transition: all 0.2s; cursor: pointer; }
+        .news-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .news-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .news-tag { background: var(--bg-light); color: var(--text-secondary); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 500; }
+        .news-tag.hot { background: #fef3c7; color: #d97706; }
+        .news-tag.ai { background: #dbeafe; color: #2563eb; }
+        .news-tag.stock { background: #fce7f3; color: #db2777; }
+        .news-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+        .news-excerpt { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
         
-        .news-section h2 {
-            font-size: 1.1rem;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .news-item {
-            background: var(--bg-white);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .news-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-        
-        .news-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-        
-        .news-tag {
-            background: var(--bg-light);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        
-        .news-tag.hot {
-            background: #fef3c7;
-            color: #d97706;
-        }
-        
-        .news-tag.ai {
-            background: #dbeafe;
-            color: #2563eb;
-        }
-        
-        .news-tag.stock {
-            background: #fce7f3;
-            color: #db2777;
-        }
-        
-        .news-time {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .news-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        
-        .news-excerpt {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
+        /* Loading */
+        .loading { text-align: center; padding: 40px; color: var(--text-secondary); }
         
         /* Footer */
-        .footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
-        }
+        .footer { text-align: center; padding: 24px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 40px; }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .header-inner {
-                padding: 0 16px;
-            }
-            
-            .top-tabs-inner {
-                padding: 0 16px;
-                overflow-x: auto;
-            }
-            
-            .top-tab {
-                padding: 12px 20px;
-                white-space: nowrap;
-            }
-            
-            .container {
-                padding: 16px;
-            }
-            
-            .hot-list {
-                flex-direction: column;
-            }
-            
-            .summary-item {
-                flex-direction: column;
-            }
+            .header-inner { padding: 0 16px; }
+            .top-tabs-inner { padding: 0 16px; overflow-x: auto; }
+            .top-tab { padding: 12px 20px; white-space: nowrap; }
+            .container { padding: 16px; }
+            .indices-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        
         @media (min-width: 1024px) {
-            .news-list {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
+            .news-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <a href="/" class="logo">
-                <span class="logo-icon">🐼</span>
-                <span>熊猫信息网站</span>
-            </a>
-            <div class="header-right">
-                <span class="date-badge" id="currentDate">加载中...</span>
-            </div>
+            <a href="/" class="logo"><span class="logo-icon">🐼</span><span>熊猫信息网站</span></a>
+            <div class="header-right"><span class="date-badge" id="currentDate">加载中...</span></div>
         </div>
     </header>
     
-    <!-- Top Tabs -->
     <nav class="top-tabs">
         <div class="top-tabs-inner">
             <button class="top-tab active" data-page="home">🏠 首页</button>
@@ -444,22 +132,16 @@
         </div>
     </nav>
     
-    <!-- Main Content -->
-    <main class="container" id="mainContent">
-        <div class="loading">正在加载新闻...</div>
-    </main>
+    <main class="container" id="mainContent"><div class="loading">正在加载新闻...</div></main>
     
-    <!-- Footer -->
     <footer class="footer">
         <p>🐼 熊猫信息网站 | 每日财经科技精选</p>
         <p id="lastUpdate">更新时间: 加载中...</p>
     </footer>
 
     <script>
-        // 新闻数据
         let newsData = null;
         
-        // 加载新闻数据
         async function loadNews() {
             try {
                 const response = await fetch('data/news.json');
@@ -467,24 +149,14 @@
                 renderNews();
             } catch (error) {
                 console.error('加载新闻失败:', error);
-                document.getElementById('mainContent').innerHTML = `
-                    <div class="loading">
-                        <p>加载新闻失败，请刷新页面重试</p>
-                    </div>
-                `;
+                document.getElementById('mainContent').innerHTML = '<div class="loading"><p>加载新闻失败，请刷新页面重试</p></div>';
             }
         }
         
-        // 渲染新闻
         function renderNews() {
             if (!newsData) return;
             
-            const date = newsData.date || new Date().toLocaleDateString('zh-CN', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            
+            const date = newsData.date || new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('currentDate').textContent = date;
             document.getElementById('lastUpdate').textContent = `更新时间: ${newsData.lastUpdate || '未知'}`;
             
@@ -496,69 +168,63 @@
                     <div class="hot-list">
                         ${newsData.hot.map((item, i) => `
                             <div class="hot-item">
-                                <span class="hot-rank">${i + 1}</span>
-                                ${item}
+                                <div class="hot-item-title"><span class="hot-rank">${i + 1}</span>${item.title}</div>
+                                <div class="hot-item-desc">${item.desc}</div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
                 
+                <!-- 核心指数 -->
+                <div class="market-section">
+                    ${renderMarketIndices()}
+                </div>
+                
                 <!-- 财经摘要 -->
                 <div class="daily-summary">
                     <div class="summary-header">
-                        <h2>📊 今日财经摘要</h2>
-                        <button class="toggle-btn" onclick="toggleDetails('finance-details', this)">
-                            <span>展开详情</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <h2>📊 今日财经核心问题</h2>
+                    </div>
+                    <div class="core-issues">
+                        ${newsData.finance.coreIssues.map((issue, i) => `
+                            <div class="core-issue">
+                                <span class="core-issue-num">${i + 1}</span>
+                                <span class="core-issue-text">${issue}</span>
+                            </div>
+                        `).join('')}
                     </div>
                     <div class="summary-text">${newsData.finance.summary}</div>
-                    <div class="summary-details" id="finance-details">
-                        <div class="summary-section">
-                            <h3 class="summary-section-title">💰 财经要点</h3>
-                            <div class="summary-list">
-                                ${newsData.finance.highlights.map(item => `
-                                    <div class="summary-item">
-                                        <span>${item.title}</span>
-                                        <a href="${item.link}" class="summary-link" target="_blank">阅读原文 →</a>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- 科技摘要 -->
                 <div class="daily-summary">
                     <div class="summary-header">
-                        <h2>💻 今日科技摘要</h2>
-                        <button class="toggle-btn" onclick="toggleDetails('tech-details', this)">
-                            <span>展开详情</span>
-                            <span class="toggle-icon">▼</span>
-                        </button>
+                        <h2>💻 今日科技核心问题</h2>
+                    </div>
+                    <div class="core-issues">
+                        ${newsData.tech.coreIssues.map((issue, i) => `
+                            <div class="core-issue">
+                                <span class="core-issue-num">${i + 1}</span>
+                                <span class="core-issue-text">${issue}</span>
+                            </div>
+                        `).join('')}
                     </div>
                     <div class="summary-text">${newsData.tech.summary}</div>
-                    <div class="summary-details" id="tech-details">
-                        <div class="summary-section">
-                            <h3 class="summary-section-title">🤖 科技要点</h3>
-                            <div class="summary-list">
-                                ${newsData.tech.highlights.map(item => `
-                                    <div class="summary-item">
-                                        <span>${item.title}</span>
-                                        <a href="${item.link}" class="summary-link" target="_blank">阅读原文 →</a>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             `;
             
             // 财经页
             const financeContent = `
+                <div class="market-section">${renderMarketIndices()}</div>
                 <div class="daily-summary">
-                    <div class="summary-header">
-                        <h2>📊 财经要闻</h2>
+                    <div class="summary-header"><h2>📊 财经要闻</h2></div>
+                    <div class="core-issues">
+                        ${newsData.finance.coreIssues.map((issue, i) => `
+                            <div class="core-issue">
+                                <span class="core-issue-num">${i + 1}</span>
+                                <span class="core-issue-text">${issue}</span>
+                            </div>
+                        `).join('')}
                     </div>
                     <div class="summary-text">${newsData.finance.summary}</div>
                 </div>
@@ -567,9 +233,7 @@
                     <div class="news-list">
                         ${newsData.finance.highlights.map(item => `
                             <div class="news-item" onclick="window.open('${item.link}', '_blank')">
-                                <div class="news-meta">
-                                    <span class="news-tag ${item.tag === '热点' ? 'hot' : ''}">${item.tag}</span>
-                                </div>
+                                <div class="news-meta"><span class="news-tag ${item.tag === '热点' ? 'hot' : ''}">${item.tag}</span></div>
                                 <h3 class="news-title">${item.title}</h3>
                                 <p class="news-excerpt">${item.excerpt}</p>
                             </div>
@@ -581,8 +245,14 @@
             // 科技页
             const techContent = `
                 <div class="daily-summary">
-                    <div class="summary-header">
-                        <h2>💻 科技要闻</h2>
+                    <div class="summary-header"><h2>💻 科技要闻</h2></div>
+                    <div class="core-issues">
+                        ${newsData.tech.coreIssues.map((issue, i) => `
+                            <div class="core-issue">
+                                <span class="core-issue-num">${i + 1}</span>
+                                <span class="core-issue-text">${issue}</span>
+                            </div>
+                        `).join('')}
                     </div>
                     <div class="summary-text">${newsData.tech.summary}</div>
                 </div>
@@ -591,9 +261,7 @@
                     <div class="news-list">
                         ${newsData.tech.highlights.map(item => `
                             <div class="news-item" onclick="window.open('${item.link}', '_blank')">
-                                <div class="news-meta">
-                                    <span class="news-tag ai">${item.tag}</span>
-                                </div>
+                                <div class="news-meta"><span class="news-tag ai">${item.tag}</span></div>
                                 <h3 class="news-title">${item.title}</h3>
                                 <p class="news-excerpt">${item.excerpt}</p>
                             </div>
@@ -602,27 +270,64 @@
                 </div>
             `;
             
-            // 存储各页面内容
-            window.pageContents = {
-                home: homeContent,
-                finance: financeContent,
-                tech: techContent
-            };
-            
-            // 显示首页
+            window.pageContents = { home: homeContent, finance: financeContent, tech: techContent };
             showPage('home');
         }
         
-        // 切换页面
+        function renderMarketIndices() {
+            if (!newsData || !newsData.market) return '';
+            
+            let html = '';
+            
+            // 美股
+            if (newsData.market.us) {
+                html += `<div class="market-group"><h3>🇺🇸 ${newsData.market.us.name}</h3><div class="indices-grid">`;
+                html += newsData.market.us.indices.map(idx => `
+                    <div class="index-item">
+                        <div class="index-name">${idx.name}</div>
+                        <div class="index-value">${idx.value}</div>
+                        <div class="index-change ${idx.trend}">${idx.change} (${idx.changePercent})</div>
+                    </div>
+                `).join('');
+                html += '</div></div>';
+            }
+            
+            // A股
+            if (newsData.market.cn) {
+                html += `<div class="market-group"><h3>🇨🇳 ${newsData.market.cn.name}</h3><div class="indices-grid">`;
+                html += newsData.market.cn.indices.map(idx => `
+                    <div class="index-item">
+                        <div class="index-name">${idx.name}</div>
+                        <div class="index-value">${idx.value}</div>
+                        <div class="index-change ${idx.trend}">${idx.change} (${idx.changePercent})</div>
+                    </div>
+                `).join('');
+                html += '</div></div>';
+            }
+            
+            // 大宗商品
+            if (newsData.market.commodities) {
+                html += `<div class="market-group"><h3>🛢️ ${newsData.market.commodities.name}</h3><div class="indices-grid">`;
+                html += newsData.market.commodities.indices.map(idx => `
+                    <div class="index-item">
+                        <div class="index-name">${idx.name}</div>
+                        <div class="index-value">${idx.value}</div>
+                        <div class="index-change ${idx.trend}">${idx.change} (${idx.changePercent})</div>
+                    </div>
+                `).join('');
+                html += '</div></div>';
+            }
+            
+            return html;
+        }
+        
         function showPage(page) {
             document.querySelectorAll('.top-tab').forEach(tab => {
                 tab.classList.toggle('active', tab.dataset.page === page);
             });
-            
             document.getElementById('mainContent').innerHTML = window.pageContents[page] || '<div class="loading">加载中...</div>';
         }
         
-        // 切换详情显示
         function toggleDetails(id, btn) {
             const details = document.getElementById(id);
             details.classList.toggle('show');
@@ -630,12 +335,10 @@
             btn.querySelector('span').textContent = details.classList.contains('show') ? '收起详情' : '展开详情';
         }
         
-        // Tab 切换事件
         document.querySelectorAll('.top-tab').forEach(tab => {
             tab.addEventListener('click', () => showPage(tab.dataset.page));
         });
         
-        // 页面加载 - 多种方式确保执行
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadNews);
         } else {
