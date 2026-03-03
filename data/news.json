@@ -1,0 +1,79 @@
+{
+  "lastUpdate": "2026-03-03T08:23:41+08:00",
+  "date": "2026年03月03日",
+  "finance": {
+    "summary": "今日财经热点：市场关注地缘政治局势，油价金价波动，科技股走势分化。",
+    "highlights": [
+      {
+        "title": "美伊冲突升级，油价金价双双上涨",
+        "excerpt": "中东局势紧张推动油价和黄金上涨，投资者纷纷转向避险资产。",
+        "tag": "热点",
+        "link": "https://www.investopedia.com"
+      },
+      {
+        "title": "S&P 500与纳指转涨",
+        "excerpt": "市场消化中东局势影响，科技股有所反弹。",
+        "tag": "股市",
+        "link": "https://www.investopedia.com"
+      },
+      {
+        "title": "英伟达财报超预期但股价下跌",
+        "excerpt": "尽管第四季度利润增长94%，英伟达股价仍因"买预期卖事实"而下跌。",
+        "tag": "科技",
+        "link": "https://www.investopedia.com"
+      },
+      {
+        "title": "地缘政治推动黄金价格上涨",
+        "excerpt": "投资者寻求避险资产，分析师预计金价可能进一步走高。",
+        "tag": "黄金",
+        "link": "https://www.forbes.com"
+      },
+      {
+        "title": "AMD因Meta AI芯片合作大涨",
+        "excerpt": "Meta宣布与AMD达成100亿美元AI芯片合作协议，AMD股价应声上涨。",
+        "tag": "科技",
+        "link": "https://www.tipranks.com"
+      }
+    ]
+  },
+  "tech": {
+    "summary": "AI颠覆性影响持续，科技公司强制推行AI工具纳入绩效考核。",
+    "highlights": [
+      {
+        "title": "OpenAI获得1100亿美元融资",
+        "excerpt": "创AI领域历史纪录，软银、英伟达、亚马逊领投。",
+        "tag": "AI",
+        "link": "https://techcrunch.com"
+      },
+      {
+        "title": "科技公司强制推行AI工具",
+        "excerpt": "纳入员工绩效考核，AI使用不再是可选项。",
+        "tag": "AI",
+        "link": "https://techcrunch.com"
+      },
+      {
+        "title": "Google推出AI专业证书",
+        "excerpt": "加速劳动力转型，帮助人们获取AI相关技能。",
+        "tag": "AI",
+        "link": "https://techcrunch.com"
+      },
+      {
+        "title": "OpenAI开发ChatGPT硬件设备",
+        "excerpt": "据悉正在开发首款ChatGPT硬件设备，进军硬件领域。",
+        "tag": "AI",
+        "link": "https://techcrunch.com"
+      },
+      {
+        "title": "内存芯片全球短缺",
+        "excerpt": "AI需求推动内存芯片全球短缺，智能手机价格创历史新高。",
+        "tag": "硬件",
+        "link": "https://techcrunch.com"
+      }
+    ]
+  },
+  "hot": [
+    "美伊冲突推高油价金价",
+    "OpenAI与国防部达成协议",
+    "科技股强制使用AI工具"
+  ]
+}

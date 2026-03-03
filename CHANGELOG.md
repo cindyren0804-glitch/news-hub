@@ -1,4 +1,30 @@
-# News Hub 更新日志
+# 🐼 熊猫信息网站 更新日志
+
+## v1.2.0 - 2026-03-03
+
+### 项目更新
+- ✅ 项目更名为"熊猫信息网站"（Panda Info Hub）
+- ✅ 更新 PRD 文档：部署方式改为 GitHub Pages
+- ✅ 标记"自动化每日更新"为已完成
+
+---
+
+## v1.1.0 - 2026-03-02
+
+### 新功能
+- ✅ 部署到 GitHub Pages（固定域名）
+- ✅ 响应式布局优化
+  - 移动端：热门话题在上方
+  - 桌面端：热门话题在左侧
+  - 大屏幕：新闻 summary 更详细
+- ✅ 每日自动更新（早上 8:00）
+
+### 部署
+- **固定域名：** https://cindyren0804-glitch.github.io/news-hub
+- **GitHub 仓库：** cindyren0804-glitch/news-hub
+- **定时任务：** 每天 08:00 自动更新
+
+---
 
 ## v1.0.0 - 2026-02-28
 
@@ -16,10 +42,6 @@
 - 财经：财新网、华尔街见闻、Reuters、WSJ、Economist等
 - 科技：36氪、虎嗅、The Verge、TechCrunch等
 - 博主：猫笔刀、饭统戴老板等
-
-### 部署
-- Cloudflare Tunnel 公网访问
-- 地址：https://compaq-atm-tampa-reactions.trycloudflare.com
 
 ---
 

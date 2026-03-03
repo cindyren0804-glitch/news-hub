@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>信息汇总中心 | News Hub</title>
+    <title>熊猫信息网站 | Panda Info Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -58,35 +58,17 @@
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            font-size: 1.5rem;
         }
         
         .header-right {
             display: flex;
             align-items: center;
             gap: 16px;
-        }
-        
-        .lang-switch {
-            display: flex;
-            background: var(--bg-light);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-        
-        .lang-btn {
-            padding: 6px 12px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        
-        .lang-btn.active {
-            background: var(--primary);
-            color: white;
         }
         
         .date-badge {
@@ -121,6 +103,7 @@
             border-bottom: 3px solid transparent;
             transition: all 0.2s;
             font-weight: 500;
+            font-family: inherit;
         }
         
         .top-tab:hover {
@@ -193,35 +176,31 @@
             background: var(--bg-light);
             border-radius: 8px;
             border: none;
+            font-family: inherit;
         }
         
         .toggle-icon {
             transition: transform 0.3s;
         }
         
-        .toggle-icon.expanded {
+        .toggle-btn.expanded .toggle-icon {
             transform: rotate(180deg);
         }
         
         .summary-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            display: none;
         }
         
-        .summary-details.expanded {
-            max-height: 2000px;
+        .summary-details.show {
+            display: block;
         }
         
         .summary-section {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            margin-bottom: 24px;
         }
         
         .summary-section-title {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 1rem;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
@@ -229,129 +208,113 @@
         }
         
         .summary-list {
-            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .summary-item {
-            margin-bottom: 10px;
-            padding-left: 8px;
-            position: relative;
-            line-height: 1.6;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            gap: 12px;
         }
         
-        .summary-item::before {
-            content: "•";
-            position: absolute;
-            left: -12px;
-            color: var(--primary);
-            font-weight: bold;
+        .summary-item span {
+            flex: 1;
         }
         
         .summary-link {
             color: var(--primary);
             text-decoration: none;
             font-size: 0.85rem;
-            margin-left: 8px;
+            white-space: nowrap;
         }
         
         .summary-link:hover {
             text-decoration: underline;
         }
         
-        /* Section Layout */
-        .section {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 32px;
-            margin-bottom: 48px;
+        /* Hot Topics */
+        .hot-topics {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
         }
         
-        /* 大屏幕：summary更详细 */
-        @media (min-width: 1400px) {
-            .section {
-                grid-template-columns: 320px 1fr;
-            }
-            
-            .news-excerpt {
-                -webkit-line-clamp: 4;
-                font-size: 0.95rem;
-                line-height: 1.7;
-            }
-            
-            .news-title {
-                font-size: 1.2rem;
-            }
-        }
-        
-        /* 移动端：热门话题在上方 */
-        @media (max-width: 900px) {
-            .section {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                order: -1 !important;
-            }
-        }
-        
-        /* News List */
-        .news-section {
-            background: var(--bg-white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .section-title {
+        .hot-topics h2 {
+            color: white;
             font-size: 1.1rem;
-            font-weight: 600;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
-        .view-all {
-            color: var(--primary);
+        .hot-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .hot-item {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hot-rank {
+            background: rgba(255,255,255,0.3);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        /* News Section */
+        .news-section {
+            margin-bottom: 32px;
+        }
+        
+        .news-section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .news-list {
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         
         .news-item {
+            background: var(--bg-white);
+            border-radius: 12px;
             padding: 20px;
-            border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-item {
+            border: 1px solid var(--border);
+            transition: all 0.2s;
             cursor: pointer;
         }
         
         .news-item:hover {
-            background: var(--bg-light);
-        }
-        
-        .news-item.featured {
-            background: linear-gradient(135deg, #fef3c7 0%, #fff7ed 100%);
-        }
-        
-        .news-item.featured:hover {
-            background: linear-gradient(135deg, #fde68a 0%, #ffedd5 100%);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
         
         .news-meta {
@@ -362,19 +325,27 @@
         }
         
         .news-tag {
-            background: var(--primary);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: var(--bg-light);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 12px;
             font-size: 0.75rem;
+            font-weight: 500;
         }
         
         .news-tag.hot {
-            background: #ef4444;
+            background: #fef3c7;
+            color: #d97706;
         }
         
         .news-tag.ai {
-            background: #8b5cf6;
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        
+        .news-tag.stock {
+            background: #fce7f3;
+            color: #db2777;
         }
         
         .news-time {
@@ -383,210 +354,69 @@
         }
         
         .news-title {
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1.05rem;
+            font-weight: 600;
             margin-bottom: 8px;
-            line-height: 1.4;
-            cursor: pointer;
-        }
-        
-        .news-title:hover {
-            color: var(--primary);
+            color: var(--text-primary);
         }
         
         .news-excerpt {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.6;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
         
-        /* 大屏幕显示更多内容 */
-        @media (min-width: 1400px) {
-            .news-excerpt {
-                -webkit-line-clamp: 4;
-                font-size: 0.95rem;
-                line-height: 1.7;
-            }
-            
-            .news-title {
-                font-size: 1.2rem;
-            }
-            
-            .news-item {
-                padding: 24px;
-            }
-        }
-        
-        .news-source {
-            margin-top: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .source-name {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .source-link {
-            color: var(--primary);
-            font-size: 0.85rem;
-            text-decoration: none;
-        }
-        
-        .source-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* Sidebar - 桌面端在左侧 */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        /* 移动端热门话题在上方 */
-        @media (max-width: 900px) {
-            .sidebar {
-                order: -1;
-            }
-        }
-        
-        .sidebar-card {
-            background: var(--bg-white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .sidebar-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .hot-list {
-            padding: 0;
-        }
-        
-        .hot-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        .hot-item:hover {
-            background: var(--bg-light);
-        }
-        
-        .hot-rank {
-            width: 24px;
-            height: 24px;
-            background: var(--text-secondary);
-            color: white;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        
-        .hot-rank.top1 { background: #ef4444; }
-        .hot-rank.top2 { background: #f97316; }
-        .hot-rank.top3 { background: #eab308; }
-        
-        .hot-title {
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        
-        /* Source Links Card */
-        .source-links {
-            padding: 16px;
-        }
-        
-        .source-link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .source-link-item:last-child {
-            border-bottom: none;
-        }
-        
-        .source-link-item a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .source-link-item a:hover {
-            color: var(--primary);
-        }
-        
-        .source-link-item .arrow {
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
             color: var(--text-secondary);
         }
         
         /* Footer */
         .footer {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border);
-            padding: 32px 20px;
-            margin-top: 48px;
-        }
-        
-        .footer-inner {
-            max-width: 1280px;
-            margin: 0 auto;
             text-align: center;
-        }
-        
-        .footer p {
+            padding: 24px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
         }
         
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-right {
-                gap: 8px;
+            .header-inner {
+                padding: 0 16px;
             }
             
-            .date-badge {
-                display: none;
-            }
-            
-            .daily-summary {
-                padding: 20px;
-            }
-            
-            .summary-header h2 {
-                font-size: 1rem;
+            .top-tabs-inner {
+                padding: 0 16px;
+                overflow-x: auto;
             }
             
             .top-tab {
                 padding: 12px 20px;
-                font-size: 0.9rem;
+                white-space: nowrap;
             }
             
-            .section-header {
+            .container {
+                padding: 16px;
+            }
+            
+            .hot-list {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
+            }
+            
+            .summary-item {
+                flex-direction: column;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .news-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
         }
     </style>
@@ -595,592 +425,218 @@
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <div class="logo">
-                <span>📰</span>
-                <span data-i18n="title">信息汇总中心</span>
-            </div>
+            <a href="/" class="logo">
+                <span class="logo-icon">🐼</span>
+                <span>熊猫信息网站</span>
+            </a>
             <div class="header-right">
-                <div class="lang-switch">
-                    <button class="lang-btn active" data-lang="zh">中文</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </div>
-                <div class="date-badge">2026.03.02</div>
+                <span class="date-badge" id="currentDate">加载中...</span>
             </div>
         </div>
     </header>
     
     <!-- Top Tabs -->
-    <div class="top-tabs">
+    <nav class="top-tabs">
         <div class="top-tabs-inner">
-            <button class="top-tab active" data-page="finance" data-i18n="nav_finance">💰 财经要闻</button>
-            <button class="top-tab" data-page="tech" data-i18n="nav_tech">💻 科技动态</button>
+            <button class="top-tab active" data-page="home">🏠 首页</button>
+            <button class="top-tab" data-page="finance">💰 财经</button>
+            <button class="top-tab" data-page="tech">💻 科技</button>
         </div>
-    </div>
+    </nav>
     
-    <main class="container">
-        <!-- Finance Page -->
-        <div id="finance-page" class="page-content active">
-            <!-- Daily Summary -->
-            <section class="daily-summary">
-                <div class="summary-header">
-                    <h2><span>📌</span> <span data-i18n="summary_title">今日财经摘要</span></h2>
-                    <button class="toggle-btn" onclick="toggleSummary('finance')">
-                        <span data-i18n="view_details">查看详情</span>
-                        <span class="toggle-icon" id="finance-icon">▼</span>
-                    </button>
-                </div>
-                <p class="summary-text" data-i18n="finance_summary">
-                    美国最高法院推翻特朗普关税政策，全球市场震荡。英伟达财报超预期但股价下跌5.6%，金价突破5250美元/盎司，AMD因Meta AI芯片合作大涨。亚太股市多数上涨，受英伟达财报利好提振。
-                </p>
-                <div class="summary-details" id="finance-details">
-                    <div class="summary-section">
-                        <h3 class="summary-section-title">💰 <span data-i18n="summary_finance">财经要点</span></h3>
-                        <div class="summary-list">
-                            <div class="summary-item">
-                                <span data-i18n="finance_1">美国最高法院推翻特朗普关税政策，全球市场反应分化。美股期货下跌，亚太市场多数上涨。</span>
-                                <a href="https://www.reuters.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="finance_2">英伟达财报超预期（利润增长94%），但股价下跌5.6%，"买预期卖事实"。</span>
-                                <a href="https://www.investopedia.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="finance_3">金价突破5250美元/盎司，美伊对峙推动避险需求。</span>
-                                <a href="https://www.mining.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="finance_4">AMD因Meta AI芯片合作（100亿美元）大涨，科技股分化明显。</span>
-                                <a href="https://apnews.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="finance_5">道指涨0.03%，标普500跌0.54%，纳指跌1.18%。</span>
-                                <a href="https://www.investopedia.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Main Content -->
-            <section class="section">
-                <div class="sidebar" style="order: -1;">
-                    <!-- Hot Topics -->
-                    <div class="sidebar-card">
-                        <div class="sidebar-header" data-i18n="hot_topics">🔥 热门话题</div>
-                        <div class="hot-list">
-                            <div class="hot-item">
-                                <span class="hot-rank top1">1</span>
-                                <span class="hot-title" data-i18n="hot_1">特朗普关税政策被推翻</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank top2">2</span>
-                                <span class="hot-title" data-i18n="hot_2">英伟达财报后的市场反应</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank top3">3</span>
-                                <span class="hot-title" data-i18n="hot_3">金价突破5250美元</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank">4</span>
-                                <span class="hot-title" data-i18n="hot_4">AMD-Meta AI芯片合作</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank">5</span>
-                                <span class="hot-title" data-i18n="hot_5">亚太股市上涨</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Links -->
-                    <div class="sidebar-card">
-                        <div class="sidebar-header" data-i18n="quick_links">📱 快捷入口</div>
-                        <div class="source-links">
-                            <div class="source-link-item">
-                                <a href="https://www.caixin.com" target="_blank">财新网</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://wallstreetcn.com" target="_blank">华尔街见闻</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://www.economist.com" target="_blank">The Economist</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://www.wsj.com" target="_blank">WSJ</a>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="news-section">
-                    <div class="section-header">
-                        <h2 class="section-title"><span data-i18n="finance_news">财经新闻</span></h2>
-                        <a href="#" class="view-all" data-i18n="view_more">查看更多 →</a>
-                    </div>
-                    <div class="news-list">
-                        <div class="news-item featured" data-href="https://www.reuters.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag hot" data-i18n="tag_hot">热点</span>
-                                <span class="news-time">2h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="news_title_1">美国最高法院推翻特朗普关税政策，全球市场震荡</h3>
-                            <p class="news-excerpt" data-i18n="news_excerpt_1">美国最高法院裁定特朗普关税政策违宪，美股期货下跌，亚太市场反应分化。投资者重新评估贸易政策前景。</p>
-                            <div class="news-source">
-                                <span class="source-name">Reuters</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://www.investopedia.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_market">市场</span>
-                                <span class="news-time">3h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="news_title_2">英伟达财报超预期，但股价下跌5.6%</h3>
-                            <p class="news-excerpt" data-i18n="news_excerpt_2">尽管第四季度利润增长94%，英伟达股价仍因"买预期卖事实"而下跌。分析师预计公司将继续主导AI芯片市场。</p>
-                            <div class="news-source">
-                                <span class="source-name">Investopedia</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://www.mining.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_gold">黄金</span>
-                                <span class="news-time">4h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="news_title_3">金价突破5250美元/盎司，美伊对峙推动避险需求</h3>
-                            <p class="news-excerpt" data-i18n="news_excerpt_3">地缘政治紧张局势推动黄金价格上涨，投资者寻求避险资产。分析师预计金价可能进一步走高。</p>
-                            <div class="news-source">
-                                <span class="source-name">Mining.com</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://apnews.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_stock">股市</span>
-                                <span class="news-time">5h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="news_title_4">AMD因Meta AI芯片合作大涨，科技股分化明显</h3>
-                            <p class="news-excerpt" data-i18n="news_excerpt_4">Meta宣布与AMD达成100亿美元AI芯片合作协议，AMD股价应声上涨。科技股内部出现明显分化。</p>
-                            <div class="news-source">
-                                <span class="source-name">AP News</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://www.tipranks.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_asia">亚太</span>
-                                <span class="news-time">6h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="news_title_5">亚太股市多数上涨，受英伟达财报利好提振</h3>
-                            <p class="news-excerpt" data-i18n="news_excerpt_5">尽管美股下跌，亚太市场受英伟达超预期财报提振，多数上涨。投资者对AI概念股信心恢复。</p>
-                            <div class="news-source">
-                                <span class="source-name">TipRanks</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Tech Page -->
-        <div id="tech-page" class="page-content">
-            <!-- Daily Summary -->
-            <section class="daily-summary">
-                <div class="summary-header">
-                    <h2><span>📌</span> <span data-i18n="tech_summary_title">今日科技摘要</span></h2>
-                    <button class="toggle-btn" onclick="toggleSummary('tech')">
-                        <span data-i18n="view_details">查看详情</span>
-                        <span class="toggle-icon" id="tech-icon">▼</span>
-                    </button>
-                </div>
-                <p class="summary-text" data-i18n="tech_summary">
-                    OpenAI获得1100亿美元融资创历史纪录，软银、英伟达、亚马逊领投。科技公司强制推行AI工具纳入绩效考核，61%企业将AI转型列为最大安全挑战。Gartner预测人类创造力将成为AI时代核心竞争力。
-                </p>
-                <div class="summary-details" id="tech-details">
-                    <div class="summary-section">
-                        <h3 class="summary-section-title">🤖 <span data-i18n="summary_tech">科技要点</span></h3>
-                        <div class="summary-list">
-                            <div class="summary-item">
-                                <span data-i18n="tech_1">OpenAI获得1100亿美元融资，创AI领域历史纪录，软银、英伟达、亚马逊领投。</span>
-                                <a href="https://thenextweb.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="tech_2">科技公司强制推行AI工具，纳入员工绩效考核。</span>
-                                <a href="https://www.wsj.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="tech_3">61%企业将AI转型列为最大安全挑战（Thales 2026报告）。</span>
-                                <a href="https://markets.ft.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="tech_4">Gartner预测：AI时代人类创造力将成为核心竞争力。</span>
-                                <a href="https://www.usatoday.com" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                            <div class="summary-item">
-                                <span data-i18n="tech_5">OpenAI预计到2030年计算支出达6000亿美元。</span>
-                                <a href="https://www.itnews.com.au" class="summary-link" target="_blank">阅读原文 →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Main Content -->
-            <section class="section">
-                <div class="sidebar" style="order: -1;">
-                    <!-- Hot Topics -->
-                    <div class="sidebar-card">
-                        <div class="sidebar-header" data-i18n="tech_hot">🔥 科技热点</div>
-                        <div class="hot-list">
-                            <div class="hot-item">
-                                <span class="hot-rank top1">1</span>
-                                <span class="hot-title" data-i18n="tech_hot_1">OpenAI创纪录融资</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank top2">2</span>
-                                <span class="hot-title" data-i18n="tech_hot_2">企业AI安全挑战加剧</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank top3">3</span>
-                                <span class="hot-title" data-i18n="tech_hot_3">AI工具强制推行</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank">4</span>
-                                <span class="hot-title" data-i18n="tech_hot_4">人类创造力价值</span>
-                            </div>
-                            <div class="hot-item">
-                                <span class="hot-rank">5</span>
-                                <span class="hot-title" data-i18n="tech_hot_5">ASML光刻机突破</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Links -->
-                    <div class="sidebar-card">
-                        <div class="sidebar-header" data-i18n="tech_media">📱 科技媒体</div>
-                        <div class="source-links">
-                            <div class="source-link-item">
-                                <a href="https://36kr.com" target="_blank">36氪</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://www.huxiu.com" target="_blank">虎嗅</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://www.theverge.com" target="_blank">The Verge</a>
-                                <span class="arrow">→</span>
-                            </div>
-                            <div class="source-link-item">
-                                <a href="https://techcrunch.com" target="_blank">TechCrunch</a>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="news-section">
-                    <div class="section-header">
-                        <h2 class="section-title"><span data-i18n="tech_news">科技新闻</span></h2>
-                        <a href="#" class="view-all" data-i18n="view_more">查看更多 →</a>
-                    </div>
-                    <div class="news-list">
-                        <div class="news-item featured" data-href="https://thenextweb.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag ai">AI</span>
-                                <span class="news-time">1h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="tech_title_1">OpenAI获1100亿美元融资，创AI领域历史纪录</h3>
-                            <p class="news-excerpt" data-i18n="tech_excerpt_1">软银、英伟达、亚马逊领投，OpenAI宣布里程碑式融资轮，旨在"让AI规模化惠及每个人"。预计到2030年计算支出达6000亿美元。</p>
-                            <div class="news-source">
-                                <span class="source-name">The Next Web</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://www.wsj.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag ai">AI</span>
-                                <span class="news-time">2h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="tech_title_2">科技公司强制推行AI工具，纳入绩效考核</h3>
-                            <p class="news-excerpt" data-i18n="tech_excerpt_2">越来越多科技公司将AI使用纳入员工绩效考核，"试点AI工具"已不再是炫耀资本，企业要求看到实际产出。</p>
-                            <div class="news-source">
-                                <span class="source-name">WSJ</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://markets.ft.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag ai">AI</span>
-                                <span class="news-time">3h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="tech_title_3">61%企业将AI转型列为最大安全挑战</h3>
-                            <p class="news-excerpt" data-i18n="tech_excerpt_3">Thales 2026数据威胁报告显示，AI驱动转型的快速步伐成为企业最大的安全挑战，需要重新审视数据保护策略。</p>
-                            <div class="news-source">
-                                <span class="source-name">Financial Times</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://www.usatoday.com" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_innovation">创新</span>
-                                <span class="news-time">4h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="tech_title_4">Gartner预测：AI时代人类创造力将成为核心竞争力</h3>
-                            <p class="news-excerpt" data-i18n="tech_excerpt_4">成功组织将聚焦以人为本的内容和技能溢价，强调人类创造力和独特性在AI时代的重要性。</p>
-                            <div class="news-source">
-                                <span class="source-name">USA Today</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                        
-                        <div class="news-item" data-href="https://intellectia.ai" onclick="openNews(this)">
-                            <div class="news-meta">
-                                <span class="news-tag" data-i18n="tag_chip">芯片</span>
-                                <span class="news-time">5h ago</span>
-                            </div>
-                            <h3 class="news-title" data-i18n="tech_title_5">ASML高数值孔径EUV光刻机量产在即</h3>
-                            <p class="news-excerpt" data-i18n="tech_excerpt_5">ASML预计2026年净销售额达407-467亿美元，批准143.7亿美元股票回购计划，对未来增长充满信心。</p>
-                            <div class="news-source">
-                                <span class="source-name">Intellectia AI</span>
-                                <span class="source-link">阅读原文 →</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+    <!-- Main Content -->
+    <main class="container" id="mainContent">
+        <div class="loading">正在加载新闻...</div>
     </main>
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-inner">
-            <p>📰 <span data-i18n="footer_title">信息汇总中心 · 每日精选财经科技资讯</span></p>
-            <p style="margin-top: 8px;">Made with ❤️ by 阿瓜 · <span data-i18n="update_time">更新时间：2026年2月28日</span></p>
-        </div>
+        <p>🐼 熊猫信息网站 | 每日财经科技精选</p>
+        <p id="lastUpdate">更新时间: 加载中...</p>
     </footer>
-    
+
     <script>
-        // Toggle Summary
-        function toggleSummary(type) {
-            const details = document.getElementById(type + '-details');
-            const icon = document.getElementById(type + '-icon');
-            const btn = icon.previousElementSibling;
-            
-            details.classList.toggle('expanded');
-            icon.classList.toggle('expanded');
-            
-            if (details.classList.contains('expanded')) {
-                btn.textContent = currentLang === 'zh' ? '收起详情' : 'Collapse';
-            } else {
-                btn.textContent = currentLang === 'zh' ? '查看详情' : 'View details';
+        // 新闻数据
+        let newsData = null;
+        
+        // 加载新闻数据
+        async function loadNews() {
+            try {
+                const response = await fetch('data/news.json');
+                newsData = await response.json();
+                renderNews();
+            } catch (error) {
+                console.error('加载新闻失败:', error);
+                document.getElementById('mainContent').innerHTML = `
+                    <div class="loading">
+                        <p>加载新闻失败，请刷新页面重试</p>
+                    </div>
+                `;
             }
         }
         
-        // Page Tabs
-        document.querySelectorAll('.top-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Update tab states
-                document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
+        // 渲染新闻
+        function renderNews() {
+            if (!newsData) return;
+            
+            const date = newsData.date || new Date().toLocaleDateString('zh-CN', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            document.getElementById('currentDate').textContent = date;
+            document.getElementById('lastUpdate').textContent = `更新时间: ${newsData.lastUpdate || '未知'}`;
+            
+            // 首页
+            const homeContent = `
+                <!-- 热门话题 -->
+                <div class="hot-topics">
+                    <h2>🔥 热门话题</h2>
+                    <div class="hot-list">
+                        ${newsData.hot.map((item, i) => `
+                            <div class="hot-item">
+                                <span class="hot-rank">${i + 1}</span>
+                                ${item}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
                 
-                // Update page content
-                const page = this.dataset.page;
-                document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-                document.getElementById(page + '-page').classList.add('active');
-            });
-        });
-        
-        // Language Switch
-        let currentLang = 'zh';
-        
-        const translations = {
-            zh: {
-                title: '信息汇总中心',
-                nav_finance: '💰 财经要闻',
-                nav_tech: '💻 科技动态',
-                summary_title: '今日财经摘要',
-                tech_summary_title: '今日科技摘要',
-                view_details: '查看详情',
-                summary_finance: '财经要点',
-                summary_tech: '科技要点',
-                finance_summary: '美国最高法院推翻特朗普关税政策，全球市场震荡。英伟达财报超预期但股价下跌5.6%，金价突破5250美元/盎司，AMD因Meta AI芯片合作大涨。亚太股市多数上涨，受英伟达财报利好提振。',
-                tech_summary: 'OpenAI获得1100亿美元融资创历史纪录，软银、英伟达、亚马逊领投。科技公司强制推行AI工具纳入绩效考核，61%企业将AI转型列为最大安全挑战。Gartner预测人类创造力将成为AI时代核心竞争力。',
-                finance_1: '美国最高法院推翻特朗普关税政策，全球市场反应分化。美股期货下跌，亚太市场多数上涨。',
-                finance_2: '英伟达财报超预期（利润增长94%），但股价下跌5.6%，"买预期卖事实"。',
-                finance_3: '金价突破5250美元/盎司，美伊对峙推动避险需求。',
-                finance_4: 'AMD因Meta AI芯片合作（100亿美元）大涨，科技股分化明显。',
-                finance_5: '道指涨0.03%，标普500跌0.54%，纳指跌1.18%。',
-                tech_1: 'OpenAI获得1100亿美元融资，创AI领域历史纪录，软银、英伟达、亚马逊领投。',
-                tech_2: '科技公司强制推行AI工具，纳入员工绩效考核。',
-                tech_3: '61%企业将AI转型列为最大安全挑战（Thales 2026报告）。',
-                tech_4: 'Gartner预测：AI时代人类创造力将成为核心竞争力。',
-                tech_5: 'OpenAI预计到2030年计算支出达6000亿美元。',
-                finance_news: '财经新闻',
-                view_more: '查看更多 →',
-                tag_hot: '热点',
-                tag_market: '市场',
-                tag_gold: '黄金',
-                tag_stock: '股市',
-                tag_asia: '亚太',
-                hot_topics: '🔥 热门话题',
-                hot_1: '特朗普关税政策被推翻',
-                hot_2: '英伟达财报后的市场反应',
-                hot_3: '金价突破5250美元',
-                hot_4: 'AMD-Meta AI芯片合作',
-                hot_5: '亚太股市上涨',
-                quick_links: '📱 快捷入口',
-                tech_hot: '🔥 科技热点',
-                tech_hot_1: 'OpenAI创纪录融资',
-                tech_hot_2: '企业AI安全挑战加剧',
-                tech_hot_3: 'AI工具强制推行',
-                tech_hot_4: '人类创造力价值',
-                tech_hot_5: 'ASML光刻机突破',
-                tech_media: '📱 科技媒体',
-                tech_news: '科技新闻',
-                tag_innovation: '创新',
-                tag_chip: '芯片',
-                news_title_1: '美国最高法院推翻特朗普关税政策，全球市场震荡',
-                news_excerpt_1: '美国最高法院裁定特朗普关税政策违宪，美股期货下跌，亚太市场反应分化。投资者重新评估贸易政策前景。',
-                news_title_2: '英伟达财报超预期，但股价下跌5.6%',
-                news_excerpt_2: '尽管第四季度利润增长94%，英伟达股价仍因"买预期卖事实"而下跌。分析师预计公司将继续主导AI芯片市场。',
-                news_title_3: '金价突破5250美元/盎司，美伊对峙推动避险需求',
-                news_excerpt_3: '地缘政治紧张局势推动黄金价格上涨，投资者寻求避险资产。分析师预计金价可能进一步走高。',
-                news_title_4: 'AMD因Meta AI芯片合作大涨，科技股分化明显',
-                news_excerpt_4: 'Meta宣布与AMD达成100亿美元AI芯片合作协议，AMD股价应声上涨。科技股内部出现明显分化。',
-                news_title_5: '亚太股市多数上涨，受英伟达财报利好提振',
-                news_excerpt_5: '尽管美股下跌，亚太市场受英伟达超预期财报提振，多数上涨。投资者对AI概念股信心恢复。',
-                tech_title_1: 'OpenAI获1100亿美元融资，创AI领域历史纪录',
-                tech_excerpt_1: '软银、英伟达、亚马逊领投，OpenAI宣布里程碑式融资轮，旨在"让AI规模化惠及每个人"。预计到2030年计算支出达6000亿美元。',
-                tech_title_2: '科技公司强制推行AI工具，纳入绩效考核',
-                tech_excerpt_2: '越来越多科技公司将AI使用纳入员工绩效考核，"试点AI工具"已不再是炫耀资本，企业要求看到实际产出。',
-                tech_title_3: '61%企业将AI转型列为最大安全挑战',
-                tech_excerpt_3: 'Thales 2026数据威胁报告显示，AI驱动转型的快速步伐成为企业最大的安全挑战，需要重新审视数据保护策略。',
-                tech_title_4: 'Gartner预测：AI时代人类创造力将成为核心竞争力',
-                tech_excerpt_4: '成功组织将聚焦以人为本的内容和技能溢价，强调人类创造力和独特性在AI时代的重要性。',
-                tech_title_5: 'ASML高数值孔径EUV光刻机量产在即',
-                tech_excerpt_5: 'ASML预计2026年净销售额达407-467亿美元，批准143.7亿美元股票回购计划，对未来增长充满信心。',
-                footer_title: '信息汇总中心 · 每日精选财经科技资讯',
-                update_time: '更新时间：2026年3月2日'
-            },
-            en: {
-                title: 'News Hub',
-                nav_finance: '💰 Finance',
-                nav_tech: '💻 Technology',
-                summary_title: 'Today\'s Finance Highlights',
-                tech_summary_title: 'Today\'s Tech Highlights',
-                view_details: 'View details',
-                summary_finance: 'Finance Highlights',
-                summary_tech: 'Tech Highlights',
-                finance_summary: 'US Supreme Court strikes down Trump tariffs, markets shake. Nvidia beats earnings but stock falls 5.6%. Gold breaks $5,250/oz. AMD surges on Meta AI chip deal. Asia-Pacific markets rise on Nvidia earnings.',
-                tech_summary: 'OpenAI secures record $110B funding led by SoftBank, Nvidia, Amazon. Tech firms enforce AI tools in performance reviews. 61% of firms list AI as top security challenge. Gartner predicts human creativity becomes core competitive advantage.',
-                finance_1: 'US Supreme Court strikes down Trump tariffs, global markets react differently. US futures fall, Asia-Pacific mostly rises.',
-                finance_2: 'Nvidia beats earnings (profit up 94%), but stock drops 5.6% - "buy the rumor, sell the news".',
-                finance_3: 'Gold breaks $5,250/oz as US-Iran tensions drive safe-haven demand.',
-                finance_4: 'AMD surges on Meta AI chip deal ($100B), tech stocks diverge.',
-                finance_5: 'Dow +0.03%, S&P 500 -0.54%, Nasdaq -1.18%.',
-                tech_1: 'OpenAI secures record $110B funding led by SoftBank, Nvidia, Amazon.',
-                tech_2: 'Tech firms enforce AI tool usage, integrate into performance reviews.',
-                tech_3: '61% of enterprises list AI transformation as top security challenge.',
-                tech_4: 'Gartner predicts: Human creativity becomes core competitive advantage in AI era.',
-                tech_5: 'OpenAI expects ~$600B compute spending through 2030.',
-                finance_news: 'Finance News',
-                view_more: 'View all →',
-                tag_hot: 'Hot',
-                tag_market: 'Market',
-                tag_gold: 'Gold',
-                tag_stock: 'Stock',
-                tag_asia: 'Asia',
-                hot_topics: '🔥 Trending',
-                hot_1: 'Trump tariffs struck down',
-                hot_2: 'Nvidia post-earnings reaction',
-                hot_3: 'Gold breaks $5,250',
-                hot_4: 'AMD-Meta AI chip deal',
-                hot_5: 'Asia-Pacific markets rise',
-                quick_links: '📱 Quick Links',
-                tech_hot: '🔥 Tech Trending',
-                tech_hot_1: 'OpenAI record funding',
-                tech_hot_2: 'Enterprise AI security',
-                tech_hot_3: 'AI tools enforcement',
-                tech_hot_4: 'Human creativity value',
-                tech_hot_5: 'ASML lithography break',
-                tech_media: '📱 Tech Media',
-                tech_news: 'Tech News',
-                tag_innovation: 'Innovation',
-                tag_chip: 'Chip',
-                news_title_1: 'US Supreme Court Strikes Down Trump Tariffs, Markets Shake',
-                news_excerpt_1: 'Supreme Court rules Trump tariffs unconstitutional. US futures fall, Asia-Pacific markets react differently.',
-                news_title_2: 'Nvidia Beats Earnings But Stock Falls 5.6%',
-                news_excerpt_2: 'Despite 94% profit growth, Nvidia stock drops on "buy rumor, sell news". Analysts expect continued AI chip dominance.',
-                news_title_3: 'Gold Breaks $5,250/oz on US-Iran Tensions',
-                news_excerpt_3: 'Geopolitical tensions drive gold prices higher as investors seek safe-haven assets.',
-                news_title_4: 'AMD Surges on Meta AI Chip Deal',
-                news_excerpt_4: 'Meta announces $100B AI chip partnership with AMD. Tech stocks show clear divergence.',
-                news_title_5: 'Asia-Pacific Markets Rise on Nvidia Earnings',
-                news_excerpt_5: 'Despite US decline, Asia-Pacific markets rise on Nvidia earnings beat.',
-                tech_title_1: 'OpenAI Secures Record $110B Funding',
-                tech_excerpt_1: 'SoftBank, Nvidia, Amazon lead historic funding round. Compute spending expected to reach $600B by 2030.',
-                tech_title_2: 'Tech Firms Enforce AI Usage in Performance Reviews',
-                tech_excerpt_2: 'Companies integrate AI tool usage into employee performance metrics.',
-                tech_title_3: '61% of Firms List AI as Top Security Challenge',
-                tech_excerpt_3: 'Thales 2026 Data Threat Report shows rapid AI transformation becoming biggest enterprise security concern.',
-                tech_title_4: 'Gartner: Human Creativity Key in AI Era',
-                tech_excerpt_4: 'Successful organizations will focus on human-centric content and skill premium.',
-                tech_title_5: 'ASML High-NA EUV Machines Ready for Mass Production',
-                tech_excerpt_5: 'ASML expects $40.7-46.7B net sales in 2026, approves $14.37B share buyback program.',
-                footer_title: 'News Hub · Daily Finance & Tech Digest',
-                update_time: 'Updated: Mar 2, 2026'
-            }
-        };
-        
-        function switchLanguage(lang) {
-            currentLang = lang;
+                <!-- 财经摘要 -->
+                <div class="daily-summary">
+                    <div class="summary-header">
+                        <h2>📊 今日财经摘要</h2>
+                        <button class="toggle-btn" onclick="toggleDetails('finance-details', this)">
+                            <span>展开详情</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                    <div class="summary-text">${newsData.finance.summary}</div>
+                    <div class="summary-details" id="finance-details">
+                        <div class="summary-section">
+                            <h3 class="summary-section-title">💰 财经要点</h3>
+                            <div class="summary-list">
+                                ${newsData.finance.highlights.map(item => `
+                                    <div class="summary-item">
+                                        <span>${item.title}</span>
+                                        <a href="${item.link}" class="summary-link" target="_blank">阅读原文 →</a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 科技摘要 -->
+                <div class="daily-summary">
+                    <div class="summary-header">
+                        <h2>💻 今日科技摘要</h2>
+                        <button class="toggle-btn" onclick="toggleDetails('tech-details', this)">
+                            <span>展开详情</span>
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                    <div class="summary-text">${newsData.tech.summary}</div>
+                    <div class="summary-details" id="tech-details">
+                        <div class="summary-section">
+                            <h3 class="summary-section-title">🤖 科技要点</h3>
+                            <div class="summary-list">
+                                ${newsData.tech.highlights.map(item => `
+                                    <div class="summary-item">
+                                        <span>${item.title}</span>
+                                        <a href="${item.link}" class="summary-link" target="_blank">阅读原文 →</a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
             
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
+            // 财经页
+            const financeContent = `
+                <div class="daily-summary">
+                    <div class="summary-header">
+                        <h2>📊 财经要闻</h2>
+                    </div>
+                    <div class="summary-text">${newsData.finance.summary}</div>
+                </div>
+                <div class="news-section">
+                    <h2>💰 财经新闻</h2>
+                    <div class="news-list">
+                        ${newsData.finance.highlights.map(item => `
+                            <div class="news-item" onclick="window.open('${item.link}', '_blank')">
+                                <div class="news-meta">
+                                    <span class="news-tag ${item.tag === '热点' ? 'hot' : ''}">${item.tag}</span>
+                                </div>
+                                <h3 class="news-title">${item.title}</h3>
+                                <p class="news-excerpt">${item.excerpt}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
             
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
+            // 科技页
+            const techContent = `
+                <div class="daily-summary">
+                    <div class="summary-header">
+                        <h2>💻 科技要闻</h2>
+                    </div>
+                    <div class="summary-text">${newsData.tech.summary}</div>
+                </div>
+                <div class="news-section">
+                    <h2>🤖 科技新闻</h2>
+                    <div class="news-list">
+                        ${newsData.tech.highlights.map(item => `
+                            <div class="news-item" onclick="window.open('${item.link}', '_blank')">
+                                <div class="news-meta">
+                                    <span class="news-tag ai">${item.tag}</span>
+                                </div>
+                                <h3 class="news-title">${item.title}</h3>
+                                <p class="news-excerpt">${item.excerpt}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
             
-            // Update toggle buttons
-            ['finance', 'tech'].forEach(type => {
-                const details = document.getElementById(type + '-details');
-                const btn = document.querySelector(`#${type}-icon`).previousElementSibling;
-                if (details.classList.contains('expanded')) {
-                    btn.textContent = lang === 'zh' ? '收起详情' : 'Collapse';
-                } else {
-                    btn.textContent = lang === 'zh' ? '查看详情' : 'View details';
-                }
-            });
+            // 存储各页面内容
+            window.pageContents = {
+                home: homeContent,
+                finance: financeContent,
+                tech: techContent
+            };
+            
+            // 显示首页
+            showPage('home');
         }
         
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+        // 切换页面
+        function showPage(page) {
+            document.querySelectorAll('.top-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.page === page);
+            });
+            
+            document.getElementById('mainContent').innerHTML = window.pageContents[page] || '<div class="loading">加载中...</div>';
+        }
+        
+        // 切换详情显示
+        function toggleDetails(id, btn) {
+            const details = document.getElementById(id);
+            details.classList.toggle('show');
+            btn.classList.toggle('expanded');
+            btn.querySelector('span').textContent = details.classList.contains('show') ? '收起详情' : '展开详情';
+        }
+        
+        // Tab 切换事件
+        document.querySelectorAll('.top-tab').forEach(tab => {
+            tab.addEventListener('click', () => showPage(tab.dataset.page));
         });
         
-        // Open news article
-        function openNews(element) {
-            const href = element.getAttribute('data-href');
-            if (href) {
-                window.open(href, '_blank');
-            }
-        }
+        // 页面加载
+        loadNews();
     </script>
 </body>
 </html>
