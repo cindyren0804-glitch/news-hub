@@ -194,13 +194,14 @@
                                 <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
                                     <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
                                     <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                    <p style="margin-top: 8px; font-size: 0.85rem;"><a href="${issue.link}" target="_blank" style="color: var(--primary); text-decoration: none;">📎 查看原文</a></p>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
                     <div class="summary-text">${newsData.finance.summary}</div>
                 </div>
-                
+
                 <!-- 科技摘要 -->
                 <div class="daily-summary">
                     <div class="summary-header">
@@ -216,6 +217,7 @@
                                 <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
                                     <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
                                     <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                    <p style="margin-top: 8px; font-size: 0.85rem;"><a href="${issue.link}" target="_blank" style="color: var(--primary); text-decoration: none;">📎 查看原文</a></p>
                                 </div>
                             </div>
                         `).join('')}
@@ -223,7 +225,7 @@
                     <div class="summary-text">${newsData.tech.summary}</div>
                 </div>
             `;
-            
+
             // 财经页
             const financeContent = `
                 <div class="market-section">${renderMarketIndices()}</div>
@@ -239,6 +241,7 @@
                                 <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
                                     <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
                                     <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                    <p style="margin-top: 8px; font-size: 0.85rem;"><a href="${issue.link}" target="_blank" style="color: var(--primary); text-decoration: none;">📎 查看原文</a></p>
                                 </div>
                             </div>
                         `).join('')}
@@ -273,6 +276,7 @@
                                 <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
                                     <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
                                     <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                    <p style="margin-top: 8px; font-size: 0.85rem;"><a href="${issue.link}" target="_blank" style="color: var(--primary); text-decoration: none;">📎 查看原文</a></p>
                                 </div>
                             </div>
                         `).join('')}
