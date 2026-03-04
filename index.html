@@ -168,8 +168,7 @@
                     <div class="hot-list">
                         ${newsData.hot.map((item, i) => `
                             <div class="hot-item">
-                                <div class="hot-item-title"><span class="hot-rank">${i + 1}</span>${item.title}</div>
-                                <div class="hot-item-desc">${item.desc}</div>
+                                <div class="hot-item-title"><span class="hot-rank">${i + 1}</span>${item}</div>
                             </div>
                         `).join('')}
                     </div>
@@ -187,9 +186,15 @@
                     </div>
                     <div class="core-issues">
                         ${newsData.finance.coreIssues.map((issue, i) => `
-                            <div class="core-issue">
-                                <span class="core-issue-num">${i + 1}</span>
-                                <span class="core-issue-text">${issue}</span>
+                            <div class="core-issue" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                    <span class="core-issue-num">${i + 1}</span>
+                                    <strong style="color: var(--primary);">${issue.title}</strong>
+                                </div>
+                                <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
+                                    <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -203,9 +208,15 @@
                     </div>
                     <div class="core-issues">
                         ${newsData.tech.coreIssues.map((issue, i) => `
-                            <div class="core-issue">
-                                <span class="core-issue-num">${i + 1}</span>
-                                <span class="core-issue-text">${issue}</span>
+                            <div class="core-issue" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                    <span class="core-issue-num">${i + 1}</span>
+                                    <strong style="color: var(--primary);">${issue.title}</strong>
+                                </div>
+                                <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
+                                    <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -220,9 +231,15 @@
                     <div class="summary-header"><h2>📊 财经要闻</h2></div>
                     <div class="core-issues">
                         ${newsData.finance.coreIssues.map((issue, i) => `
-                            <div class="core-issue">
-                                <span class="core-issue-num">${i + 1}</span>
-                                <span class="core-issue-text">${issue}</span>
+                            <div class="core-issue" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                    <span class="core-issue-num">${i + 1}</span>
+                                    <strong style="color: var(--primary);">${issue.title}</strong>
+                                </div>
+                                <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
+                                    <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -248,9 +265,15 @@
                     <div class="summary-header"><h2>💻 科技要闻</h2></div>
                     <div class="core-issues">
                         ${newsData.tech.coreIssues.map((issue, i) => `
-                            <div class="core-issue">
-                                <span class="core-issue-num">${i + 1}</span>
-                                <span class="core-issue-text">${issue}</span>
+                            <div class="core-issue" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                    <span class="core-issue-num">${i + 1}</span>
+                                    <strong style="color: var(--primary);">${issue.title}</strong>
+                                </div>
+                                <div style="padding-left: 30px; color: var(--text-primary); line-height: 1.6;">
+                                    <p style="margin-bottom: 8px;"><strong>摘要：</strong>${issue.summary}</p>
+                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${issue.detail}</p>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
