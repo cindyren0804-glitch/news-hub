@@ -144,7 +144,8 @@
         
         async function loadNews() {
             try {
-                const response = await fetch('data/news.json');
+                const cacheBuster = '?_=' + Date.now();
+                const response = await fetch('data/news.json' + cacheBuster);
                 newsData = await response.json();
                 renderNews();
             } catch (error) {
