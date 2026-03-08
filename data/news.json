@@ -1,28 +1,8 @@
 {
-  "lastUpdate": "2026-03-07T00:00:17+08:00",
-  "date": "2026年03月07日",
+  "lastUpdate": "2026-03-08T00:00:20+08:00",
+  "date": "2026年03月08日",
   "finance": {
     "summary": "今日财经热点：市场关注地缘政治局势，油价金价波动，科技股走势分化。",
-    "coreIssues": [
-      {
-        "title": "美伊冲突升级，油价金价双双上涨",
-        "summary": "中东局势紧张推动油价和黄金上涨",
-        "detail": "投资者纷纷转向避险资产，地缘政治风险持续影响市场情绪。",
-        "link": "https://www.investopedia.com"
-      },
-      {
-        "title": "S&P 500与纳指转涨",
-        "summary": "市场消化中东局势影响",
-        "detail": "科技股有所反弹，投资者重新评估市场风险偏好。",
-        "link": "https://www.investopedia.com"
-      },
-      {
-        "title": "英伟达财报超预期但股价下跌",
-        "summary": "第四季度利润增长94%",
-        "detail": "尽管业绩亮眼，但股价因'买预期卖事实'而下跌。",
-        "link": "https://www.investopedia.com"
-      }
-    ],
     "highlights": [
       {
         "title": "美伊冲突升级，油价金价双双上涨",
@@ -38,7 +18,7 @@
       },
       {
         "title": "英伟达财报超预期但股价下跌",
-        "excerpt": "尽管第四季度利润增长94%，英伟达股价仍因'买预期卖事实'而下跌。",
+        "excerpt": "尽管第四季度利润增长94%，英伟达股价仍因"买预期卖事实"而下跌。",
         "tag": "科技",
         "link": "https://www.investopedia.com"
       },
@@ -58,26 +38,6 @@
   },
   "tech": {
     "summary": "AI颠覆性影响持续，科技公司强制推行AI工具纳入绩效考核。",
-    "coreIssues": [
-      {
-        "title": "OpenAI获得1100亿美元融资",
-        "summary": "创AI领域历史纪录",
-        "detail": "软银、英伟达、亚马逊领投，估值再创新高。",
-        "link": "https://techcrunch.com"
-      },
-      {
-        "title": "科技公司强制推行AI工具",
-        "summary": "纳入员工绩效考核",
-        "detail": "AI使用不再是可选项，成为职场必备技能。",
-        "link": "https://techcrunch.com"
-      },
-      {
-        "title": "Google推出AI专业证书",
-        "summary": "加速劳动力转型",
-        "detail": "帮助人们获取AI相关技能，适应新的工作环境。",
-        "link": "https://techcrunch.com"
-      }
-    ],
     "highlights": [
       {
         "title": "OpenAI获得1100亿美元融资",
