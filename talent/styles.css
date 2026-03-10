@@ -67,9 +67,9 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 首页 */
+/* 首页 - 居中 */
 .hero {
-    text-align: left;
+    text-align: center;
     padding: 60px 20px;
 }
 
