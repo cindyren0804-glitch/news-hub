@@ -21,6 +21,12 @@
     
     --radius: 12px;
     --radius-lg: 16px;
+    
+    /* 统一字体大小 */
+    --font-base: 14px;
+    --font-small: 13px;
+    --font-large: 16px;
+    --font-title: 18px;
 }
 
 /* 重置 */
@@ -36,6 +42,7 @@ body {
     min-height: 100vh;
     color: var(--text-primary);
     line-height: 1.6;
+    font-size: var(--font-base);
 }
 
 .container {
@@ -62,12 +69,12 @@ body {
 
 /* 首页 */
 .hero {
-    text-align: center;
+    text-align: left;
     padding: 60px 20px;
 }
 
 .logo {
-    font-size: 72px;
+    font-size: 64px;
     margin-bottom: 20px;
     animation: float 3s ease-in-out infinite;
 }
@@ -78,32 +85,31 @@ body {
 }
 
 .hero h1 {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: var(--font-title);
     color: var(--text-primary);
     margin-bottom: 12px;
+    font-weight: 600;
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 40px;
 }
 
 .stats {
-    font-size: 14px;
+    font-size: var(--font-small);
     color: var(--text-muted);
     margin-top: 24px;
 }
 
-/* 按钮 - 不换行 */
+/* 按钮 */
 .btn-primary {
     background: var(--primary);
     color: var(--white);
     border: none;
     padding: 14px 32px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: var(--font-base);
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -124,7 +130,6 @@ body {
 .btn-large {
     width: 100%;
     padding: 16px;
-    font-size: 16px;
 }
 
 .btn-text {
@@ -132,7 +137,7 @@ body {
     color: var(--text-muted);
     border: none;
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: var(--font-base);
     cursor: pointer;
     transition: color 0.3s;
     white-space: nowrap;
@@ -152,16 +157,17 @@ body {
 }
 
 .card h2 {
-    font-size: 22px;
+    font-size: var(--font-title);
     margin-bottom: 8px;
-    text-align: center;
+    text-align: left;
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 .hint {
-    text-align: center;
+    text-align: left;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: var(--font-small);
     margin-bottom: 24px;
 }
 
@@ -172,9 +178,8 @@ body {
 
 .form-group label {
     display: block;
-    font-weight: 600;
     margin-bottom: 12px;
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-primary);
 }
 
@@ -191,7 +196,7 @@ body {
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s;
-    font-size: 14px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     white-space: nowrap;
 }
@@ -205,7 +210,6 @@ body {
     border-color: var(--primary);
     background: var(--primary-bg);
     color: var(--primary);
-    font-weight: 600;
 }
 
 .buttons {
@@ -237,14 +241,9 @@ body {
 }
 
 .feature p {
-    font-size: 14px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     line-height: 1.6;
-}
-
-.feature strong {
-    color: var(--accent);
-    font-size: 18px;
 }
 
 /* 答题页面 */
@@ -257,8 +256,7 @@ body {
 }
 
 .progress {
-    font-size: 15px;
-    font-weight: 600;
+    font-size: var(--font-base);
     color: var(--text-primary);
 }
 
@@ -266,7 +264,6 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 600;
     color: var(--accent);
 }
 
@@ -293,11 +290,10 @@ body {
 }
 
 .question-card h3 {
-    font-size: 17px;
+    font-size: var(--font-base);
     margin-bottom: 24px;
-    text-align: center;
+    text-align: left;
     color: var(--text-primary);
-    font-weight: 500;
 }
 
 .choices {
@@ -338,8 +334,7 @@ body {
     background: var(--primary-bg);
     color: var(--primary);
     border-radius: 50%;
-    font-weight: 700;
-    font-size: 14px;
+    font-size: var(--font-base);
     flex-shrink: 0;
 }
 
@@ -349,15 +344,14 @@ body {
 }
 
 .choice-btn .text {
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-primary);
 }
 
 .vs {
     text-align: center;
-    font-size: 13px;
+    font-size: var(--font-small);
     color: var(--text-muted);
-    font-weight: 600;
     padding: 4px 0;
 }
 
@@ -386,18 +380,19 @@ body {
 
 .loading p {
     color: var(--text-secondary);
-    font-size: 15px;
+    font-size: var(--font-base);
 }
 
 /* 报告页面 */
 .report-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
 .report-header h2 {
-    font-size: 22px;
+    font-size: var(--font-title);
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 .role-section {
@@ -405,7 +400,7 @@ body {
     border-radius: var(--radius-lg);
     padding: 24px 16px;
     box-shadow: var(--shadow);
-    text-align: center;
+    text-align: left;
 }
 
 .role-badge {
@@ -414,18 +409,17 @@ body {
 }
 
 .role-name {
-    font-size: 24px;
+    font-size: var(--font-large);
     color: var(--primary);
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .role-desc {
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: var(--font-base);
     line-height: 1.7;
     margin-bottom: 24px;
-    padding: 0 8px;
 }
 
 /* TOP 5 */
@@ -434,17 +428,16 @@ body {
 }
 
 .top5 h4 {
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 16px;
-    font-weight: 500;
     text-align: left;
 }
 
 .talent-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
 }
 
@@ -460,7 +453,6 @@ body {
 .talent-card.rank-1 {
     background: var(--primary);
     color: var(--white);
-    transform: scale(1.05);
 }
 
 .talent-icon {
@@ -470,15 +462,14 @@ body {
 }
 
 .talent-name {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: var(--font-small);
     display: block;
     margin-bottom: 4px;
     white-space: nowrap;
 }
 
 .stars {
-    font-size: 11px;
+    font-size: var(--font-small);
     letter-spacing: 1px;
 }
 
@@ -495,10 +486,9 @@ body {
 }
 
 .radar-section h4 {
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 16px;
-    font-weight: 500;
     text-align: left;
 }
 
@@ -510,7 +500,7 @@ body {
 .radar-legend {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
     margin-top: 16px;
 }
@@ -519,7 +509,7 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--text-secondary);
     white-space: nowrap;
 }
@@ -532,7 +522,7 @@ body {
 
 /* 身份标识区 */
 .role-identity {
-    text-align: center;
+    text-align: left;
     margin-bottom: 24px;
     padding: 20px;
     background: var(--primary-bg);
@@ -543,21 +533,6 @@ body {
     font-size: 64px;
     margin-bottom: 12px;
     animation: float 3s ease-in-out infinite;
-}
-
-.role-name {
-    font-size: 24px;
-    color: var(--primary);
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.role-desc {
-    color: var(--text-secondary);
-    font-size: 14px;
-    line-height: 1.7;
-    max-width: 280px;
-    margin: 0 auto;
 }
 
 /* 维度详解 */
@@ -573,7 +548,6 @@ body {
     border-radius: var(--radius);
     padding: 14px;
     margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .dimension-header {
@@ -594,15 +568,13 @@ body {
 }
 
 .dimension-name {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: var(--font-base);
     color: var(--text-primary);
 }
 
 .dimension-score {
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--primary);
-    font-weight: 500;
 }
 
 .dimension-talents {
@@ -612,53 +584,12 @@ body {
     padding-left: 34px;
 }
 
-.dimension-talents-detail {
-    padding-left: 34px;
-}
-
-.talent-detail-item {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border);
-}
-
-.talent-detail-item:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.talent-name-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-
-.talent-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.talent-behaviors {
-    margin: 0;
-    padding-left: 14px;
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-.talent-behaviors li {
-    margin-bottom: 3px;
-    line-height: 1.4;
-}
-
 .talent-tag {
     background: var(--primary-bg);
     color: var(--primary);
     padding: 4px 10px;
     border-radius: 12px;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: var(--font-small);
     white-space: nowrap;
 }
 
@@ -680,7 +611,6 @@ body {
 .talent-tag.dim-weak {
     background: #f3f4f6;
     color: var(--text-muted);
-    font-style: italic;
 }
 
 /* 5Why深挖页面 */
@@ -689,25 +619,25 @@ body {
     border-radius: var(--radius);
     padding: 20px;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
     border: 1px solid var(--border);
 }
 
 .insight-box h3 {
     color: var(--primary);
-    font-size: 16px;
+    font-size: var(--font-base);
     margin-bottom: 12px;
     text-align: left;
 }
 
 .insight-box .pattern {
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-primary);
     margin-bottom: 8px;
 }
 
 .insight-box .sub-text {
-    font-size: 13px;
+    font-size: var(--font-small);
     color: var(--text-secondary);
 }
 
@@ -716,7 +646,7 @@ body {
 }
 
 .chat-section h4 {
-    font-size: 15px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 12px;
     text-align: left;
@@ -750,7 +680,7 @@ body {
 }
 
 .chat-bubble p {
-    font-size: 14px;
+    font-size: var(--font-base);
     line-height: 1.6;
     margin: 0;
     color: var(--text-primary);
@@ -776,7 +706,7 @@ body {
     color: var(--primary);
     padding: 10px 14px;
     border-radius: 20px;
-    font-size: 13px;
+    font-size: var(--font-base);
     cursor: pointer;
     transition: all 0.3s;
     text-align: left;
@@ -799,7 +729,7 @@ body {
     padding: 12px 16px;
     border: 1px solid var(--border);
     border-radius: 24px;
-    font-size: 14px;
+    font-size: var(--font-base);
     outline: none;
     color: var(--text-primary);
 }
@@ -814,7 +744,7 @@ body {
     border: none;
     padding: 12px 20px;
     border-radius: 24px;
-    font-size: 14px;
+    font-size: var(--font-base);
     cursor: pointer;
     transition: all 0.3s;
     white-space: nowrap;
@@ -833,7 +763,7 @@ body {
 }
 
 .discovery-path h4 {
-    font-size: 14px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 12px;
     text-align: left;
@@ -842,7 +772,7 @@ body {
 .path-flow {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 6px;
 }
@@ -851,7 +781,7 @@ body {
     background: var(--white);
     padding: 6px 10px;
     border-radius: 16px;
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--text-primary);
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     white-space: nowrap;
@@ -859,10 +789,10 @@ body {
 
 .arrow {
     color: var(--accent);
-    font-size: 14px;
+    font-size: var(--font-base);
 }
 
-/* 影响分析 */
+/* 影响分析 - 改为普通文本 */
 .impact-box {
     background: var(--accent-bg);
     border-radius: var(--radius);
@@ -871,20 +801,16 @@ body {
 }
 
 .impact-box h4 {
-    font-size: 14px;
+    font-size: var(--font-base);
     color: var(--accent);
     margin-bottom: 10px;
 }
 
-.impact-box ul {
-    margin: 0;
-    padding-left: 18px;
-}
-
-.impact-box li {
-    font-size: 13px;
+.impact-text {
+    font-size: var(--font-base);
     color: var(--text-secondary);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    line-height: 1.6;
 }
 
 /* 总结消息 */
@@ -898,14 +824,14 @@ body {
 }
 
 .message-box h4 {
-    font-size: 14px;
+    font-size: var(--font-base);
     color: var(--primary);
     margin-bottom: 10px;
     text-align: left;
 }
 
 .message-box p {
-    font-size: 13px;
+    font-size: var(--font-base);
     color: var(--text-secondary);
     margin-bottom: 6px;
     line-height: 1.6;
@@ -936,8 +862,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: var(--font-small);
     flex-shrink: 0;
 }
 
@@ -946,14 +871,14 @@ body {
 }
 
 .theme-header h4 {
-    font-size: 16px;
+    font-size: var(--font-base);
     color: var(--text-primary);
     margin: 0;
 }
 
 .theme-desc {
     color: var(--primary);
-    font-size: 13px;
+    font-size: var(--font-small);
     margin-bottom: 12px;
     padding-left: 34px;
 }
@@ -964,19 +889,13 @@ body {
 }
 
 .theme-section h5 {
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--text-secondary);
     margin-bottom: 6px;
-    font-weight: 600;
 }
 
-.theme-section ul {
-    margin: 0;
-    padding-left: 16px;
-}
-
-.theme-section li {
-    font-size: 13px;
+.theme-section p {
+    font-size: var(--font-base);
     color: var(--text-primary);
     margin-bottom: 4px;
     line-height: 1.5;
@@ -990,13 +909,13 @@ body {
 }
 
 .theme-watchout h5 {
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--accent);
     margin-bottom: 6px;
 }
 
 .theme-watchout p {
-    font-size: 12px;
+    font-size: var(--font-small);
     color: var(--text-secondary);
     margin: 0;
 }
@@ -1008,62 +927,48 @@ body {
     margin: 24px 0;
 }
 
-/* 礼物与挑战页面 */
+/* 礼物与挑战页面 - 改为普通文本 */
 .gifts-section, .challenges-section {
     margin-bottom: 24px;
 }
 
 .gifts-section h3, .challenges-section h3 {
-    font-size: 15px;
+    font-size: var(--font-base);
     margin-bottom: 14px;
     padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
     text-align: left;
-}
-
-.gifts-section h3 {
-    color: var(--primary);
-    border-color: var(--primary);
-}
-
-.challenges-section h3 {
-    color: var(--accent);
-    border-color: var(--accent);
-}
-
-.gift-item, .challenge-item {
-    background: var(--primary-bg);
-    border-radius: var(--radius);
-    padding: 14px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    line-height: 1.6;
     color: var(--text-primary);
 }
 
-.challenge-item {
+.gift-text, .challenge-text {
+    font-size: var(--font-base);
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    padding: 12px;
+    background: var(--primary-bg);
+    border-radius: var(--radius);
+}
+
+.challenge-text {
     background: var(--accent-bg);
 }
 
-/* 长期建议页面 */
+/* 长期建议页面 - 改为普通文本 */
 .suggestion-section {
     margin-bottom: 24px;
 }
 
 .suggestion-section h3 {
-    font-size: 15px;
-    color: var(--primary);
+    font-size: var(--font-base);
+    color: var(--text-primary);
     margin-bottom: 14px;
     text-align: left;
 }
 
-.suggestion-section ul {
-    margin: 0;
-    padding-left: 18px;
-}
-
-.suggestion-section li {
-    font-size: 13px;
+.suggestion-text {
+    font-size: var(--font-base);
     color: var(--text-primary);
     margin-bottom: 10px;
     line-height: 1.6;
@@ -1079,14 +984,6 @@ body {
         padding: 32px 12px;
     }
     
-    .hero h1 {
-        font-size: 24px;
-    }
-    
-    .logo {
-        font-size: 56px;
-    }
-    
     .card {
         padding: 20px 16px;
         margin-top: 16px;
@@ -1098,21 +995,12 @@ body {
         padding: 10px 4px;
     }
     
-    .talent-name {
-        font-size: 11px;
-    }
-    
     .option-btn, .quick-reply-btn {
-        font-size: 13px;
         padding: 8px 12px;
     }
     
     .choice-btn {
         padding: 14px;
-    }
-    
-    .choice-btn .text {
-        font-size: 14px;
     }
     
     .theme-section, .theme-watchout {
@@ -1124,15 +1012,7 @@ body {
         padding-left: 0;
     }
     
-    .dimension-talents, .dimension-talents-detail {
+    .dimension-talents {
         padding-left: 0;
-    }
-    
-    .radar-legend {
-        gap: 8px;
-    }
-    
-    .legend-item {
-        font-size: 11px;
     }
 }

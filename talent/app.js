@@ -684,8 +684,8 @@ function generateGiftsAndChallenges(top5) {
         challenges.push('注意平衡你的优势，避免过度依赖某个天赋而忽略其他方面的发展。');
     }
     
-    giftsList.innerHTML = gifts.map(g => `<div class="gift-item">${g}</div>`).join('');
-    challengesList.innerHTML = challenges.map(c => `<div class="challenge-item">${c}</div>`).join('');
+    giftsList.innerHTML = gifts.map(g => `<p class="gift-text">${g}</p>`).join('');
+    challengesList.innerHTML = challenges.map(c => `<p class="challenge-text">${c}</p>`).join('');
 }
 
 // 生成长期建议
@@ -738,9 +738,9 @@ function generateSuggestions(top5) {
         '🌱 允许自己"只想不做"一段时间，休息也是成长的一部分'
     ];
     
-    leverageList.innerHTML = leverageSuggestions.map(s => `<li>${s}</li>`).join('');
-    balanceList.innerHTML = balanceSuggestions.map(s => `<li>${s}</li>`).join('') || '<li>你的天赋组合比较平衡，继续保持～</li>';
-    growthList.innerHTML = growthSuggestions.map(s => `<li>${s}</li>`).join('');
+    leverageList.innerHTML = leverageSuggestions.map(s => `<p class="suggestion-text">${s}</p>`).join('');
+    balanceList.innerHTML = balanceSuggestions.map(s => `<p class="suggestion-text">${s}</p>`).join('') || '<p class="suggestion-text">你的天赋组合比较平衡，继续保持～</p>';
+    growthList.innerHTML = growthSuggestions.map(s => `<p class="suggestion-text">${s}</p>`).join('');
 }
 
 // 5Why 对话状态
@@ -1165,7 +1165,7 @@ function completeDialog() {
     const summaryBubble = document.createElement('div');
     summaryBubble.className = 'chat-bubble system highlight';
     summaryBubble.innerHTML = `
-        <p>💡 <strong>原来是这样呢～</strong></p>
+        <p>原来是这样呢～</p>
         <p>谢谢你愿意分享这些。从你的回答中，我感受到${insights.path.join(' → ')}这样的模式。</p>
     `;
     chatMessages.appendChild(summaryBubble);
@@ -1185,12 +1185,12 @@ function completeDialog() {
     
     // 显示影响
     const impactList = document.getElementById('impact-list');
-    impactList.innerHTML = insights.impacts.map(impact => `<li>${impact}</li>`).join('');
+    impactList.innerHTML = insights.impacts.map(impact => `<p class="impact-text">${impact}</p>`).join('');
     document.getElementById('impact-section').style.display = 'block';
     
     // 显示最终消息
     document.getElementById('final-message-1').textContent = insights.finalMessage[0];
-    document.getElementById('final-message-2').innerHTML = `<strong>${insights.finalMessage[1]}</strong>`;
+    document.getElementById('final-message-2').textContent = insights.finalMessage[1];
     document.getElementById('message-section').style.display = 'block';
     
     // 显示继续按钮
