@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5Why 根因分析工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .input-section input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .input-section input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .why-chain {
+            margin-top: 20px;
+        }
+        
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .why-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+        
+        .why-content {
+            flex: 1;
+        }
+        
+        .why-question {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .why-answer {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 60px;
+            transition: border-color 0.3s;
+        }
+        
+        .why-answer:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .arrow {
+            text-align: center;
+            color: #999;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        
+        .root-cause-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .root-cause-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .root-cause-section h3::before {
+            content: "🎯";
+        }
+        
+        .root-cause-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 1.1em;
+            background: white;
+            min-height: 80px;
+        }
+        
+        .root-cause-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+        
+        .tips {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+        
+        .tips h4 {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        
+        .tips ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 5px;
+        }
+        
+        .export-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .export-section h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .export-content {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            background: white;
+            resize: vertical;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .why-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 5Why 根因分析</h1>
+            <p>通过连续追问 5 个为什么，找到问题的根本原因</p>
+        </div>
+        
+        <div class="card">
+            <div class="tips">
+                <h4>💡 使用提示</h4>
+                <ul>
+                    <li>从一个具体的问题描述开始</li>
+                    <li>每个"为什么"都要基于上一个答案</li>
+                    <li>不要停留在表面原因，要深入挖掘</li>
+                    <li>最终答案应该是可操作的解决方案</li>
+                </ul>
+            </div>
+            
+            <div class="input-section">
+                <label for="problem">📝 问题描述</label>
+                <input type="text" id="problem" placeholder="请描述你遇到的问题，例如：网站访问量下降了 30%">
+            </div>
+            
+            <div class="why-chain" id="whyChain">
+                <!-- Why items will be generated here -->
+            </div>
+            
+            <div class="root-cause-section">
+                <h3>根本原因</h3>
+                <textarea class="root-cause-input" id="rootCause" placeholder="通过上面的分析，总结出的根本原因是..."></textarea>
+            </div>
+            
+            <div class="actions">
+                <button class="btn btn-primary" onclick="addWhy()">➕ 添加 Why</button>
+                <button class="btn btn-secondary" onclick="generateExport()">📋 导出结果</button>
+                <button class="btn btn-danger" onclick="clearAll()">🗑️ 清空</button>
+            </div>
+            
+            <div class="export-section" id="exportSection" style="display: none;">
+                <h4>导出内容（可复制保存）</h4>
+                <textarea class="export-content" id="exportContent" readonly></textarea>
+                <button class="btn btn-secondary" onclick="copyExport()" style="margin-top: 10px;">📋 复制到剪贴板</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🐼 熊猫工具箱 | 5Why 根因分析</p>
+        </div>
+    </div>
+
+    <script>
+        let whyCount = 0;
+        const maxWhy = 7; // 最多支持 7 个 Why
+        
+        // 初始化 5 个 Why
+        function init() {
+            for (let i = 0; i < 5; i++) {
+                addWhy();
+            }
+        }
+        
+        function addWhy() {
+            if (whyCount >= maxWhy) {
+                alert(`最多支持 ${maxWhy} 个 Why 哦！`);
+                return;
+            }
+            
+            whyCount++;
+            const chain = document.getElementById('whyChain');
+            
+            const whyItem = document.createElement('div');
+            whyItem.className = 'why-item';
+            whyItem.id = `why-${whyCount}`;
+            
+            const prevAnswer = whyCount > 1 ? document.querySelector(`#why-${whyCount-1} .why-answer`)?.value || '' : '';
+            
+            whyItem.innerHTML = `
+                <div class="why-number">${whyCount}</div>
+                <div class="why-content">
+                    <div class="why-question">${getWhyQuestion(whyCount, prevAnswer)}</div>
+                    <textarea class="why-answer" placeholder="因为..." oninput="updateNextWhy(${whyCount})"></textarea>
+                </div>
+            `;
+            
+            chain.appendChild(whyItem);
+            
+            // 添加箭头（除了最后一个）
+            if (whyCount < maxWhy) {
+                const arrow = document.createElement('div');
+                arrow.className = 'arrow';
+                arrow.id = `arrow-${whyCount}`;
+                arrow.innerHTML = '⬇️';
+                chain.appendChild(arrow);
+            }
+            
+            // 滚动到新元素
+            whyItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        function getWhyQuestion(num, prevAnswer) {
+            if (num === 1) {
+                return '为什么会发生这个问题？';
+            } else {
+                const shortAnswer = prevAnswer.length > 30 ? prevAnswer.substring(0, 30) + '...' : prevAnswer;
+                return `为什么${shortAnswer ? '「' + shortAnswer + '」' : '会这样'}？`;
+            }
+        }
+        
+        function updateNextWhy(currentNum) {
+            const currentAnswer = document.querySelector(`#why-${currentNum} .why-answer`).value;
+            const nextWhy = document.getElementById(`why-${currentNum + 1}`);
+            
+            if (nextWhy) {
+                const questionDiv = nextWhy.querySelector('.why-question');
+                const shortAnswer = currentAnswer.length > 30 ? currentAnswer.substring(0, 30) + '...' : currentAnswer;
+                questionDiv.textContent = `为什么${shortAnswer ? '「' + shortAnswer + '」' : '会这样'}？`;
+            }
+        }
+        
+        function generateExport() {
+            const problem = document.getElementById('problem').value || '未填写问题';
+            const rootCause = document.getElementById('rootCause').value || '未填写根本原因';
+            
+            let exportText = `# 5Why 根因分析报告\n\n`;
+            exportText += `## 问题描述\n${problem}\n\n`;
+            exportText += `## 分析过程\n\n`;
+            
+            for (let i = 1; i <= whyCount; i++) {
+                const whyItem = document.getElementById(`why-${i}`);
+                if (whyItem) {
+                    const question = whyItem.querySelector('.why-question').textContent;
+                    const answer = whyItem.querySelector('.why-answer').value || '（未填写）';
+                    exportText += `### Why ${i}\n`;
+                    exportText += `**问：** ${question}\n`;
+                    exportText += `**答：** ${answer}\n\n`;
+                }
+            }
+            
+            exportText += `## 根本原因\n${rootCause}\n\n`;
+            exportText += `---\n`;
+            exportText += `生成时间：${new Date().toLocaleString('zh-CN')}\n`;
+            
+            document.getElementById('exportContent').value = exportText;
+            document.getElementById('exportSection').style.display = 'block';
+            document.getElementById('exportSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyExport() {
+            const exportContent = document.getElementById('exportContent');
+            exportContent.select();
+            document.execCommand('copy');
+            
+            // 显示复制成功提示
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ 已复制！';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+        
+        function clearAll() {
+            if (confirm('确定要清空所有内容吗？')) {
+                document.getElementById('problem').value = '';
+                document.getElementById('rootCause').value = '';
+                document.getElementById('whyChain').innerHTML = '';
+                document.getElementById('exportSection').style.display = 'none';
+                whyCount = 0;
+                
+                // 重新初始化 5 个 Why
+                for (let i = 0; i < 5; i++) {
+                    addWhy();
+                }
+            }
+        }
+        
+        // 页面加载时初始化
+        window.onload = init;
+    </script>
+</body>
+</html>
