@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天赋测评系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 首页 -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="logo">🎯</div>
+                <h1>天赋测评系统</h1>
+                <p class="subtitle">发现你的核心天赋，找到适合你的发展路径</p>
+                <button class="btn-primary" onclick="goToPage('profile')">开始测评</button>
+                <p class="stats">已有 3,247 人完成测评 · 平均用时 8 分钟</p>
+            </div>
+        </section>
+
+        <!-- 画像采集 -->
+        <section id="profile" class="page">
+            <div class="card">
+                <h2>先了解一下你</h2>
+                <p class="hint">选填，帮助生成更精准的结果</p>
+                
+                <div class="form-group">
+                    <label>你目前的状态是？</label>
+                    <div class="options">
+                        <button class="option-btn" data-value="student">学生</button>
+                        <button class="option-btn" data-value="newbie">职场新人</button>
+                        <button class="option-btn selected" data-value="experienced">工作几年了</button>
+                        <button class="option-btn" data-value="jobseeker">待业求职中</button>
+                        <button class="option-btn" data-value="entrepreneur">自己创业</button>
+                        <button class="option-btn" data-value="freelancer">自由职业</button>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-text" onclick="goToPage('quiz')">跳过，直接开始</button>
+                    <button class="btn-primary" onclick="goToPage('intro')">下一步</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 测评说明 -->
+        <section id="intro" class="page">
+            <div class="card">
+                <h2>测评说明</h2>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span class="icon">📋</span>
+                        <p>共 <strong>20</strong> 道题<br>每题限时 <strong>20</strong> 秒</p>
+                    </div>
+                    <div class="feature">
+                        <span class="icon">⏱️</span>
+                        <p>请凭直觉选择<br>不要过度思考</p>
+                    </div>
+                    <div class="feature">
+                        <span class="icon">🎯</span>
+                        <p>没有对错<br>选择更像你的那个</p>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-large" onclick="startQuiz()">开始答题</button>
+            </div>
+        </section>
+
+        <!-- 答题页面 -->
+        <section id="quiz" class="page">
+            <div class="quiz-header">
+                <span class="progress">第 <span id="current-q">1</span>/20 题</span>
+                <div class="timer">
+                    <span id="timer">20</span>s
+                    <div class="timer-bar">
+                        <div id="timer-fill" class="timer-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <h3 id="question-text">当团队遇到难题时，你更倾向于...</h3>
+                
+                <div class="choices">
+                    <button class="choice-btn" id="choice-a" onclick="selectChoice('a')">
+                        <span class="label">A</span>
+                        <span class="text">拆解问题，找出逻辑漏洞和突破口</span>
+                    </button>
+                    
+                    <div class="vs">VS</div>
+                    
+                    <button class="choice-btn" id="choice-b" onclick="selectChoice('b')">
+                        <span class="label">B</span>
+                        <span class="text">关注大家的情绪，先让气氛缓和下来</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 加载中 -->
+        <section id="loading" class="page">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>正在分析你的天赋画像...</p>
+            </div>
+        </section>
+
+        <!-- 报告页面 - 第一部分：角色概览 -->
+        <section id="report-role" class="page">
+            <div class="report-header">
+                <h2>你的天赋画像</h2>
+            </div>
+            
+            <div class="role-section">
+                <!-- 身份标识区 -->
+                <div class="role-identity">
+                    <div class="role-avatar" id="role-avatar">🎯</div>
+                    <h3 class="role-name" id="role-name">系统架构师型</h3>
+                    <p class="role-desc" id="role-desc">你喜欢把事情理清楚、搭好框架，让复杂变有序，是大家眼里的"靠谱担当"。</p>
+                </div>
+                
+                <!-- 四维雷达图 -->
+                <div class="radar-section">
+                    <h4>你的四维雷达</h4>
+                    <canvas id="radarChart" width="300" height="300"></canvas>
+                    <div class="radar-legend" id="radar-legend">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 维度详解：每个维度显示具体天赋和解释 -->
+                <div class="dimensions-detail" id="dimensions-detail">
+                    <!-- 动态生成维度详情 -->
+                </div>
+
+                <button class="btn-primary" onclick="goToPage('report-gifts')">查看礼物与挑战</button>
+            </div>
+        </section>
+
+        <!-- 报告页面 - 第三部分：5Why深挖（交互式对话） -->
+        <section id="report-5why" class="page">
+            <div class="report-header">
+                <h2>深入了解自己</h2>
+            </div>
+            
+            <div class="card">
+                <div class="insight-box" id="5why-intro">
+                    <h3>🔮 我们发现了一个有意思的模式</h3>
+                    <p class="pattern" id="pattern-text">你既喜欢<strong>广泛了解</strong>很多东西，又想把一件事<strong>做到极致</strong>。</p>
+                    <p class="sub-text">这种多元的好奇心和深耕的渴望在你身上和谐共存，只是有时候会让你有点纠结～</p>
+                </div>
+
+                <div class="chat-section" id="chat-container">
+                    <h4>温柔的探索</h4>
+                    <div id="chat-messages">
+                        <!-- 动态生成对话 -->
+                    </div>
+                    
+                    <!-- 用户输入区域 -->
+                    <div class="chat-input-area" id="chat-input-area">
+                        <div class="quick-replies" id="quick-replies">
+                            <!-- 快速回复选项 -->
+                        </div>
+                        <div class="text-input-wrapper">
+                            <input type="text" id="user-input" placeholder="说说你的想法..." maxlength="100">
+                            <button id="send-btn" onclick="sendMessage()">发送</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 对话完成后的总结区域（初始隐藏） -->
+                <div class="discovery-path" id="discovery-section" style="display: none;">
+                    <h4>发现路径</h4>
+                    <div class="path-flow" id="path-flow">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <div class="impact-box" id="impact-section" style="display: none;">
+                    <h4>这背后的影响</h4>
+                    <ul id="impact-list">
+                        <!-- 动态生成 -->
+                    </ul>
+                </div>
+
+                <div class="message-box" id="message-section" style="display: none;">
+                    <h4>💝 想对你说</h4>
+                    <p id="final-message-1"></p>
+                    <p id="final-message-2"></p>
+                </div>
+
+                <button class="btn-primary" id="continue-btn" style="display: none;" onclick="goToPage('report-role')">查看我的天赋画像</button>
+            </div>
+        </section>
+
+        <!-- 报告页面 - 第二部分：天赋详解 -->
+        <section id="report-detail" class="page">
+            <div class="report-header">
+                <h2>天赋详解</h2>
+            </div>
+            
+            <div class="card">
+                <div class="theme-detail" id="theme-detail-list">
+                    <!-- 动态生成 -->
+                </div>
+                
+                <button class="btn-primary" onclick="goToPage('report-gifts')">查看礼物与挑战</button>
+            </div>
+        </section>
+
+        <!-- 报告页面 - 第四部分：礼物与挑战 -->
+        <section id="report-gifts" class="page">
+            <div class="report-header">
+                <h2>礼物与挑战</h2>
+            </div>
+            
+            <div class="card">
+                <div class="gifts-section">
+                    <h3>🎁 天赋带给你的礼物</h3>
+                    <div id="gifts-list">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <div class="challenges-section">
+                    <h3>🌱 可能遇到的小挑战</h3>
+                    <div id="challenges-list">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="goToPage('report-suggestions')">查看温柔建议</button>
+            </div>
+        </section>
+
+        <!-- 报告页面 - 第五部分：温柔建议 -->
+        <section id="report-suggestions" class="page">
+            <div class="report-header">
+                <h2>温柔建议</h2>
+            </div>
+            
+            <div class="card">
+                <div class="suggestion-section">
+                    <h3>💡 发挥你的天赋</h3>
+                    <ul id="suggestions-leverage">
+                        <!-- 动态生成 -->
+                    </ul>
+                </div>
+
+                <div class="suggestion-section">
+                    <h3>⚖️ 平衡你的矛盾</h3>
+                    <ul id="suggestions-balance">
+                        <!-- 动态生成 -->
+                    </ul>
+                </div>
+
+                <div class="suggestion-section">
+                    <h3>🌱 成长方向</h3>
+                    <ul id="suggestions-growth">
+                        <!-- 动态生成 -->
+                    </ul>
+                </div>
+
+                <button class="btn-primary" onclick="goToPage('home')">重新测评</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
