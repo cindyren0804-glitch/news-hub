@@ -454,7 +454,7 @@ function generateReport(results) {
     // 生成礼物与挑战
     generateGiftsAndChallenges(results.top5);
     
-    // 生成温柔建议
+    // 生成长期建议
     generateSuggestions(results.top5);
 }
 
@@ -688,7 +688,7 @@ function generateGiftsAndChallenges(top5) {
     challengesList.innerHTML = challenges.map(c => `<div class="challenge-item">${c}</div>`).join('');
 }
 
-// 生成温柔建议
+// 生成长期建议
 function generateSuggestions(top5) {
     const topThemeNames = top5.map(t => t.theme);
     const leverageList = document.getElementById('suggestions-leverage');
@@ -921,46 +921,101 @@ const dynamic5Why = {
         };
     },
     
-    // 生成洞察总结
+    // 生成洞察总结 - 基于用户实际回答
     generateInsights: (pattern, answers) => {
         const allAnswers = answers.join(' ');
+        const lastAnswer = answers[answers.length - 1] || '';
         
         let path = [];
         let impacts = [];
         let finalMessage = [];
         
+        // 分析用户回答中的关键词
+        const hasFear = allAnswers.includes('怕') || allAnswers.includes('担心') || allAnswers.includes('焦虑');
+        const hasValue = allAnswers.includes('价值') || allAnswers.includes('认可') || allAnswers.includes('被看见');
+        const hasChildhood = allAnswers.includes('从小') || allAnswers.includes('小时候') || allAnswers.includes('早期');
+        const hasWork = allAnswers.includes('工作') || allAnswers.includes('经历');
+        const hasChoice = allAnswers.includes('选择') || allAnswers.includes('纠结');
+        const hasEnjoy = allAnswers.includes('享受') || allAnswers.includes('满足') || allAnswers.includes('快乐');
+        const hasDrive = allAnswers.includes('动力') || allAnswers.includes('驱动');
+        
         if (pattern.type === 'strength') {
             const data = themeData[pattern.theme];
-            path = [`${data.name}的渴望`, '持续投入', '获得成就感', '形成正向循环'];
+            
+            // 根据用户回答构建路径
+            if (hasChildhood) {
+                path.push('早期的经历');
+            }
+            path.push(`${data.name}的渴望`);
+            
+            if (hasValue) {
+                path.push('寻求认可');
+            } else if (hasEnjoy) {
+                path.push('享受过程');
+            } else {
+                path.push('持续投入');
+            }
+            
+            if (hasDrive) {
+                path.push('成为核心动力');
+            } else {
+                path.push('形成行为模式');
+            }
+            
             impacts = [
-                `在${data.name}相关的事情上表现出色`,
-                '可能会过度投入，忽略其他方面',
-                '遇到不擅长的领域容易挫败'
+                `在${data.name}相关的事情上表现出色，容易获得成就感`,
+                '可能会在这个领域过度投入，忽略其他维度的发展',
+                '当环境不需要这个天赋时，可能会感到不适应或挫败'
             ];
+            
             finalMessage = [
-                `你对${data.name}的追求，是一种珍贵的天赋。`,
-                `同时也记得：你的价值不只在这一个维度，全面的你才是完整的你 ✨`
+                `你对${data.name}的追求，是一种珍贵的天赋。它让你在这个领域有独特的优势。`,
+                `同时也记得：你的价值不只在这一个维度，全面的你才是完整的你。试着在发挥天赋的同时，也给其他方面一些成长的空间。`
             ];
+            
         } else if (pattern.type === 'contradiction') {
             const [t1, t2] = pattern.themes;
-            path = [`${themeData[t1].name}的渴望`, `${themeData[t2].name}的向往`, '内心的拉扯', '寻找平衡'];
+            const name1 = themeData[t1].name;
+            const name2 = themeData[t2].name;
+            
+            // 根据用户回答构建路径
+            if (hasChildhood) {
+                path.push('成长经历的影响');
+            } else if (hasWork) {
+                path.push('工作经历的塑造');
+            }
+            
+            path.push(`${name1}的渴望`);
+            path.push(`${name2}的向往`);
+            
+            if (hasFear && hasChoice) {
+                path.push('选择时的纠结');
+            } else if (hasFear) {
+                path.push('内心的担忧');
+            } else if (hasEnjoy) {
+                path.push('两者的平衡');
+            } else {
+                path.push('寻找整合');
+            }
+            
+            if (hasValue) {
+                path.push('确认自我价值');
+            } else if (hasDrive) {
+                path.push('驱动前行');
+            } else {
+                path.push('持续探索');
+            }
+            
             impacts = [
-                '两种力量都很强，让你更加全面',
-                '做选择时容易纠结，消耗精力',
-                '可能会在不同状态间摇摆'
+                `同时拥有${name1}和${name2}让你更加全面，能从多个角度看待问题`,
+                '两种力量的拉扯可能在做选择时消耗你的精力',
+                '可能会在不同情境下表现出不同的倾向，让人觉得你有些矛盾'
             ];
+            
             finalMessage = [
-                '这种"既想要A又想要B"的心情，其实说明你有着丰富的内在世界。',
-                '不需要急着二选一，学会让两者和谐共存，是你独特的智慧 ✨'
+                `这种"既想要${name1}又想要${name2}"的心情，其实说明你有着丰富的内在世界。`,
+                `不需要急着二选一，学会让两者和谐共存，是你独特的智慧。试着找到能让两者都发挥作用的场景，那会是你的最佳舞台。`
             ];
-        }
-        
-        // 根据回答调整洞察
-        if (allAnswers.includes('价值') || allAnswers.includes('认可')) {
-            path[path.length - 1] = '确认自我价值';
-        }
-        if (allAnswers.includes('从小') || allAnswers.includes('小时候')) {
-            path.unshift('早期的经历');
         }
         
         return { path, impacts, finalMessage };
